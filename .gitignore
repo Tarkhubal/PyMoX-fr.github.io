@@ -1,3 +1,5 @@
+.zencodeR/
+
 #MkDocs
 site/
 
@@ -27,4 +29,13 @@ site/
 public/
 site/
 _build/
+# docs/versions.json
 # CHANGELOG.md
+
+/docs/versions.json
+
+/docs/outils/logs/CHANGELOG.md
+/docs/outils/logs/hebdo.md
+
+# Généré par les workflows (push, dayly, hebdo)
+/docs/outils/logs/deploy_info.md 

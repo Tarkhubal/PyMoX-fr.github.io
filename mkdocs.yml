@@ -28,8 +28,13 @@ theme:
   # logo: assets/images/animated_favicon.gif
   logo: assets/images/pymox_logo_tr_001.png
   name: pyodide-mkdocs-theme
+  show_cache_refresh: true
   # name: material  # 👀 pour la validation
   # custom_dir: pyodide-mkdocs-theme  # 👈 ton vrai thème  # ✅ thème installé via pip, reconnu par mkdocs
+
+  # playground:
+  #   include: null
+  # ide: false
 
   ## name: material
   ##   features:
@@ -97,11 +102,25 @@ markdown_extensions:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
+  # - pymdownx.blocks.admonition
+  # - pymdownx.blocks.details
+  - pymdownx.blocks.details:
+      types:
+        - name: unreleased-block
+          class: unreleased-block
+
+  # - pymdownx.blocks:
+
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+          
+        # Option pour désactiver le label "Text Only"
+        # - pymdownx.blocks:
+        #     details:
+        #       text_only_label: false
 
   - pymdownx.arithmatex:
       generic: true
@@ -132,6 +151,7 @@ extra:
       link: https://fr.wikipedia.org
       name: L'encyclopédie libre que chacun peut améliorer
 
+    # [ ] fix icon discord
     # - icon: fontawesome/solid/discord
     #   link: mailto:grcote7l@gmail.com
     #   name: Écrire à l'auteur
@@ -158,6 +178,10 @@ plugins:
   # - tags:
   #     tags_file: tags.md # Déprécié
   - tags
+  
+  # - mkdocs-material
+  # - mkdocs-pymdownx
+  
   - pyodide_macros:
       # Vous pouvez ajouter ici tout réglage que vous auriez ajouté concernant les macros:
       on_error_fail: true # Il est conseillé d'ajouter celui-ci si vous ne l'utilisez pas.
@@ -190,9 +214,12 @@ exclude_docs: |
 
 extra_javascript:
   - xtra/javascripts/removeTrashBtn.js
-  # - javascripts/essai.js
+  # - xtra/javascripts/essai.js
+  - xtra/javascripts/copy.js
 
 extra_css:
+  - xtra/stylesheets/essais.css # ajustements
   - xtra/stylesheets/ajustements.css # ajustements
 
 # * [ ] Refaire scritp mots sémantiques suppl pour semantic-release (up, chore, fix, feat, etc...)
+

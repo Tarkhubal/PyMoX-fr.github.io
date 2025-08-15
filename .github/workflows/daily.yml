@@ -1,0 +1,66 @@
+name: Deploy Docs (CRON à ≃ 3h00)
+
+on:
+  schedule:
+    - cron: "0 1 * * *" # Tous les jours à 3h (GMT) du matin
+    # - cron: '0 * * * *' # Toutes les heures
+    # - cron: '*/15 * * * *' # Toutes les 15 minutes
+    # - cron: "*/5 * * * *" # Toutes les 5 minutes
+
+jobs:
+  daily-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: 🛠️ Installer les dépendances via script Python
+        run: python resources/auto/subs/install_deps.py
+
+      # Récupération des rapports depuis gh-pages/reports
+      - name: 🧲 Récupérer les rapports depuis gh-pages/reports
+        run: python resources/auto/subs/get_reports.py --files CHANGELOG.md hebdo.md versions.json
+        # Cette étape assure que nous utilisons toujours les rapports les plus récents
+
+      - name: 📋 Génère deploy_info.md
+        run: python resources/auto/gen_deploy_info.py --mode cron
+        # Utilise le mode CRON pour indiquer que c'est un déploiement automatique
+
+      - name: 🌐 Prépare le fichier CNAME
+        run: echo "pymox.fr" > docs/CNAME
+
+      - name: 🚀 Déploie vers gh-pages
+        run: mkdocs gh-deploy --force
+
+      - name: 💾 Sauvegarde les rapports dans 🌿 gh-pages/reports
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          FILES_TO_SAVE: "CHANGELOG.md hebdo.md versions.json deploy_info.md"
+        run: |
+          python resources/auto/subs/push_reports.py \
+            --files ${FILES_TO_SAVE} \
+            --keep-originals \
+            --ghref "cron-daily"
+
+          # Créer un tag automatiquement:
+          #   git tag -a "cron-deploy-$(date +%Y%m%d%H%M)" -m "Déploiement CRON automatique"
+
+          # 🔍 Écriture dans le fichier logs selon le type de commit
+          # if [[ "$MSG" == ⏱️* ]]; then
+          #   echo "Dernier commit (AUTO pour rebuild): $DATE" >> "$LOGS_FILE"
+          # else
+          #   echo "Commit ($MSG < $AUTOR - Manual Push): $DATE" >> "$LOGS_FILE"
+          # fi
+
+          # 🤖 Si c'est un déclenchement CRON
+          # if [[ "${{ github.event_name }}" == "schedule" ]]; then

@@ -1,0 +1,135 @@
+name: Rapport Hebdo (CRON lundi à ≃ 3h00)
+
+on:
+  # push:
+  #   branches: [dev]
+
+  schedule:
+    - cron: "0 2 * * 1" # Tous les lundi à 4h (GMT) du matin
+
+    # - cron: "0 1 * * *" # Tous les jours à 3h (GMT) du matin
+    # - cron: "0 * * * *" # Toutes les heures
+  # - cron: "*/15 * * * *" # Toutes les 15 minutes
+  # - cron: "*/5 * * * *" # Toutes les 5 minutes
+
+jobs:
+  hebdo-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: 🛠️ Installer les dépendances via script Python
+        run: python resources/auto/subs/install_deps.py
+
+      - name: Générer le rapport outils/logs/hebdo.md
+        run: python resources/auto/gen_hebdo.py
+
+      # - name: 🧲 Récupérer le CHANGELOG depuis gh-pages/reports
+      #   run: |
+      #     git config user.name "GitHub Actions"
+      #     git config user.email "actions@github.com"
+      #     # Récupérer la branche gh-pages complète
+      #     git fetch origin gh-pages
+      #     # Vérifier si la branche gh-pages existe
+      #     if git ls-remote --exit-code --heads origin gh-pages; then
+      #       echo "✅ Branche gh-pages trouvée, récupération du CHANGELOG..."
+      #       # Créer un worktree temporaire pour gh-pages
+      #       git worktree add /tmp/gh-pages-backup gh-pages
+      #       # Vérifier si le fichier CHANGELOG.md existe dans reports/
+      #       if [ -f "/tmp/gh-pages-backup/reports/CHANGELOG.md" ]; then
+      #         # Créer le dossier de destination dans docs/
+      #         mkdir -p docs/outils/logs
+      #         # Copier le fichier
+      #         cp "/tmp/gh-pages-backup/reports/CHANGELOG.md" "docs/outils/logs/CHANGELOG.md"
+      #         echo "✅ CHANGELOG.md copié dans docs/outils/logs/"
+      #         # Afficher les premières lignes pour vérification
+      #         echo "📄 Début du CHANGELOG récupéré :"
+      #         head -n 5 "docs/outils/logs/CHANGELOG.md"
+      #       else
+      #         echo "⚠️ Aucun fichier CHANGELOG.md trouvé dans gh-pages/reports"
+      #       fi
+      #       # Nettoyer le worktree temporaire
+      #       git worktree remove /tmp/gh-pages-backup
+      #     else
+      #       echo "⚠️ La branche gh-pages n'existe pas encore"
+      #     fi
+      - name: 🧲 Récupérer le dernier CHANGELOG et versions depuis gh-pages/reports
+        run: python resources/auto/subs/get_reports.py --files CHANGELOG.md versions.json
+        # Utilise le script optimisé pour récupérer les fichiers depuis gh-pages/reports
+
+      - name: 📋 Génère deploy_info.md
+        run: python resources/auto/gen_deploy_info.py --mode hebdo
+
+      - name: 🌐 Prépare le fichier CNAME
+        run: echo "pymox.fr" > docs/CNAME
+
+      # - name: 🏗️ Build site MkDocs
+      #   run: mkdocs build
+
+      - name: 🚀 Déploie vers gh-pages
+        run: mkdocs gh-deploy --force
+
+      # - name: 💾 Restaurer les fichiers persistants dans gh-pages
+      #   run: |
+      #     # Après le déploiement, restaurer les fichiers persistants
+      #     git fetch origin gh-pages
+      #     git worktree add /tmp/gh-deploy gh-pages
+
+      #     # Créer le répertoire reports s'il n'existe pas
+      #     mkdir -p /tmp/gh-deploy/reports
+
+      #     # Restaurer le CHANGELOG s'il a été sauvegardé précédemment
+      #     if [ -f /tmp/gh-files/reports/CHANGELOG.md ]; then
+      #       # Vérifier si le fichier a changé
+      #       if [ -f /tmp/gh-deploy/reports/CHANGELOG.md ]; then
+      #         if ! cmp -s "/tmp/gh-files/reports/CHANGELOG.md" "/tmp/gh-deploy/reports/CHANGELOG.md"; then
+      #           echo "📝 Le CHANGELOG a été modifié, mise à jour nécessaire"
+      #           cp "/tmp/gh-files/reports/CHANGELOG.md" "/tmp/gh-deploy/reports/CHANGELOG.md"
+      #           echo "✅ CHANGELOG.md restauré dans gh-pages/reports"
+      #         else
+      #           echo "ℹ️ Le CHANGELOG est identique, aucune mise à jour nécessaire"
+      #         fi
+      #       else
+      #         echo "🆕 Création du CHANGELOG dans gh-pages/reports"
+      #         cp "/tmp/gh-files/reports/CHANGELOG.md" "/tmp/gh-deploy/reports/CHANGELOG.md"
+      #         echo "✅ CHANGELOG.md créé dans gh-pages/reports"
+      #       fi
+
+      #       # Afficher les premières lignes pour vérification
+      #       echo "📄 Début du CHANGELOG restauré:"
+      #       head -n 5 "/tmp/gh-deploy/reports/CHANGELOG.md"
+      #     else
+      #       echo "⚠️ Aucun CHANGELOG sauvegardé à restaurer"
+      #     fi
+
+      #     # Commit et push des changements
+      #     cd /tmp/gh-deploy
+      #     git add reports/
+
+      #     if git diff --staged --quiet; then
+      #       echo "Aucun changement détecté dans les fichiers persistants"
+      #     else
+      #       git commit -m "🔄 Restauration des fichiers persistants ($(date))"
+      #       git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+      #       git push origin gh-pages
+      #       echo "✅ Fichiers persistants restaurés avec succès dans la branche gh-pages"
+      #     fi
+
+      - name: 💾 Sauvegarde les rapports dans 🌿 gh-pages/reports
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          FILES_TO_SAVE: "CHANGELOG.md versions.json hebdo.md"
+        run: |
+          python resources/auto/subs/push_reports.py \
+            --files ${FILES_TO_SAVE} \
+            --ghref ${{ github.ref_name }}

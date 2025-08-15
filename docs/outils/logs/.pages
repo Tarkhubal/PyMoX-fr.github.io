@@ -1,6 +1,8 @@
 nav:
 
+  - todo.md
   - CHANGELOG.md
   - deploy_info.md
   - last_commits.md
   - citations.md
+  - hebdo.md

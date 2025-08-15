@@ -1,0 +1,67 @@
+name: Deploy Docs (sans re-commit dans main)
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: 🛠️ Installer les dépendances via script Python
+        run: python resources/auto/subs/install_deps.py
+
+      - name: Run semantic-release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          semantic-release -vv version
+          # semantic-release changelog
+          semantic-release publish
+
+      # - name: 📦 List installed packages
+      #   run: pip freeze
+
+      - name: Génére CHANGELOG.md personnalisé
+        run: python resources/auto/gen_changelog.py
+
+      - name: 📋 Génère deploy_info.md
+        run: python resources/auto/gen_deploy_info.py --mode manual
+
+      # Récupération du rapport hebdomadaire le plus récent depuis gh-pages/reports
+      - name: 🧲 Récupérer le dernier rapport hebdomadaire depuis gh-pages/reports
+        run: python resources/auto/subs/get_reports.py --files hebdo.md
+        # Cette étape assure que nous utilisons toujours le rapport hebdo le plus récent
+
+      - name: 🌐 Prépare le fichier CNAME
+        run: echo "pymox.fr" > docs/CNAME
+
+      - name: Generate docs/versions.json
+        run: |
+          TAG=$(git describe --tags --abbrev=0)
+          echo "{\"version\": \"${TAG}\"}" > docs/versions.json
+
+      - name: 🚀 Déploie vers gh-pages
+        run: mkdocs gh-deploy --force
+
+      - name: 🧲 Pousse les rapports dans 🌿 gh-pages/reports
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          FILES_TO_SAVE: "CHANGELOG.md hebdo.md versions.json"
+        run: |
+          python resources/auto/subs/push_reports.py \
+            --files ${FILES_TO_SAVE} \
+            --keep-originals \
+            --ghref ${{ github.ref_name }}

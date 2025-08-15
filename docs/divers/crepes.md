@@ -3,16 +3,16 @@ author: GrCOTE7
 title:  🪙 Crêpes
 ---
 
-[![Dernière version](https://img.shields.io/github/v/tag/PyMoX-fr/PyMoX-fr.github.io?label=Version)](/outils/logs/CHANGELOG)
+[![Dernière version](https://img.shields.io/github/v/tag/PyMoX-fr/PyMoX-fr.github.io?label=Version)](../outils/logs/CHANGELOG.md)
 
 # Reu sept de craies peu 🪙 !
 
 ## Ingrédients
 
+* 500 grammes de farine
+* 200 grammes de sucre
 * 3 oeufs <!-- Seule donnée à ne pas changer, les autres devront être adaptées à terme -->
 * 2 cuillères de pâte à tartiner
-* 200 grammes de sucre
-* 500 grammes de sucre
 
 ## Préparation
 
@@ -25,8 +25,11 @@ Bon appétit 😊 !
 
 ---
 
-## Principe de collaboration
-
-* → Une à 3 modifications max par commit et par jour
-
-* → Des pages d'aides éventuellement seront listées ICI selon réactions de chacun...
+???+ abstract "Principe de Collaboration 🛠️ 🧰 🧵 🧪"
+    
+    * → Un à 3 ajouts et/ou modifications max par commit et par jour
+    
+    * → Des pages d'aides éventuellement seront listées ICI selon réactions de chacun...
+    
+    @ vous d'jouer 😀 !
+    

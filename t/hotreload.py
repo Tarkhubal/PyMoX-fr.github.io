@@ -5,12 +5,28 @@ import time
 import os
 
 # Fichiers à surveiller avec leurs commandes associées
+script_path = "resources/auto/gen_hebdo.py"
 FILES_TO_WATCH = {
-    os.path.abspath("main.py"): ["flet", "run", "main.py"],
-    os.path.abspath("resources/generate_changelog.py"): [
+    # os.path.abspath("main.py"): ["flet", "run", "main.py"],
+    # os.path.abspath("t/hotreload.py"): [
+    #     "flet",
+    #     "run",
+    #     "t/hotreload.py",
+    # ],
+    os.path.abspath("t/main.py"): [
         "flet",
         "run",
-        "resources/generate_changelog.py",
+        "t/main.py",
+    ],
+    # os.path.abspath("resources/generate_changelog.py"): [
+    #     "flet",
+    #     "run",
+    #     "resources/generate_changelog.py",
+    # ],
+    os.path.abspath(script_path): [
+        "flet",
+        "run",
+        script_path,
     ],
 }
 
@@ -31,7 +47,7 @@ class ReloadHandler(FileSystemEventHandler):
             if modified_file == target_file:
                 last_time = self.last_modified.get(modified_file, 0)
                 if (
-                    now - last_time < .7
+                    now - last_time < 0.7
                 ):  # Ignore if less than 1 second since last trigger
                     return
                 self.last_modified[modified_file] = now
