@@ -5,7 +5,16 @@ title: 🗂️ Derniers commits
 
 ## 🕒 Les 10 dernières modifications
 
-* [ ] API // 10 der commits
+
+<!--
+    ####################################################################################################################
+
+    ATTENTION: Ne pas modifier ce fichier, car il est généré automatiquement par `resources/auto/gen_commits.py`
+    
+    ####################################################################################################################
+-->
+
+* [ ] Coder API // 10 der commits
 
 ## Les différents types de commits
 

@@ -2,4 +2,85 @@
 version_source = "tag"
 branch = "main"
 upload_to_pypi = false
-build_command = ""
+# build_command = ""
+
+commit_parser = "angular"
+
+[tool.semantic_release.commit_parser_options]
+# Configuration pour le parser angular
+# Mapping des types de commits vers les niveaux de bump
+
+# Types qui déclenchent une version MINEURE (0.x.0)
+minor_tags = ["feat", "maj", "upgrade"]
+
+# Types qui déclenchent une version PATCH (0.0.x)
+patch_tags = [
+    "fix",
+    "doc",
+    "style",
+    "refactor",
+    "perf",
+    "ui",
+    "ux",
+    "content",
+    "i18n",
+    "typo",
+    "up",
+    "update",
+    "revert",
+    "hotfix",
+    "patch",
+    "tweak",
+    "adjust",
+    "correct",
+    "improve",
+    "enhance",
+    "optimize",
+    "clean",
+    "format",
+    "lint",
+    "deps",
+    "security",
+    "config",
+    "meta",
+    "misc",
+]
+
+# Types autorisés mais qui ne déclenchent pas de version
+other_allowed_tags = []
+
+# Liste complète de tous les types autorisés
+allowed_tags = [
+    "feat",
+    "maj",
+    "upgrade",
+    "fix",
+    "doc",
+    "style",
+    "refactor",
+    "perf",
+    "ui",
+    "ux",
+    "content",
+    "i18n",
+    "typo",
+    "up",
+    "update",
+    "revert",
+    "hotfix",
+    "patch",
+    "tweak",
+    "adjust",
+    "correct",
+    "improve",
+    "enhance",
+    "optimize",
+    "clean",
+    "format",
+    "lint",
+    "deps",
+    "security",
+    "config",
+    "meta",
+    "misc",
+]

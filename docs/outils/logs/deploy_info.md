@@ -1,5 +1,13 @@
 # ⏱️ Dernier déploiement
 
+<!--
+    ####################################################################################################################
+
+    ATTENTION: Ne pas modifier ce fichier, car il est généré automatiquement par `resources/auto/gen_deploy.py` chaque push sur la branche main
+    
+    ####################################################################################################################
+-->
+
 ## → Automatique
 
 | 📅 Date        | 🕰️ Heure (Paris)       | 🌐 ISO 8601 UTC         | 🔢 Timestamp UNIX |
@@ -14,3 +22,5 @@
 🚀 **Déclencheur** : GitHub Actions
 <br><br>
 > ✅ Ce déploiement a été enclenché **automatiquement** comme chaque nuit vers 4h (G.M.T.).
+
+# 🆕 CHANGELOG Local</span>

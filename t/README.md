@@ -3,6 +3,30 @@
 ## reset projet GH
 
 ```bash
+
+// Reset main / commit XXX (En gardant les fichiers)
+(Save locale des fichier sans .git et sans .venv)
+
+Effacer tous les tags et releases plus souhaités
+
+git checkout -b temp_backup
+
+# Trouver le hash du commit correspondant au tag exemple v1.0.1
+git log --oneline --decorate | findstr "v1.0.1"
+
+# Revenir à main
+git checkout main
+
+# Réinitialiser main au commit v1.0.1 (remplacez abcd123 par le hash réel)
+git reset --hard abcd123
+
+# Rec fichier
+
+* Commit
+
+
+
+
 // Reset / Écrase main actuelle
 
 rm -rf .git

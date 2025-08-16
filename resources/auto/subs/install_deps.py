@@ -10,7 +10,7 @@ packages = [
     "mkdocs-open-in-new-tab",
     "python-semantic-release",
     "ruamel.yaml",
-    "build",
+    "build"
 ]
 
 # Upgrade pip

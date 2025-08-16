@@ -7,7 +7,7 @@ author: GC7
 
     Même cette page, vous pouvez la modifier avec le bouton en haut, à droite, et ainsi ajouter / modifier / supprimer à volonté, des tâches à faire... Comme toutes les pages du site, elle évolue selon vos actions et/ou réactions.
 
-    Et si le :heart: vous en dit, vous pouvez même tâcher d'en réaliser l'une d'elles !
+    Et si le :heart: vous en dit, vous pouvez même tâcher d'en réaliser l'une d'elles (Voir # * [ ] lien VSC - ToDO Ext.) !
     
     N'oubliez-pas !:
     
@@ -16,8 +16,9 @@ author: GC7
 
 ## To do
 
-* Un seul script pour der déploy (Actuellement duplication dans le workflow des push / main et celui du CRON quotidien... :-(...)
-* Accepter autres mots pour semantic-release: up, chore, docs, etc...
+→ //* [ ] Add compteur et liste dynamiques des ToDos (Conserver disclaimer ci-dessus)
+  Suppr liste ci-dessous, chaque tâche ici insérée à sa bonne place
+
 * Set MAJ after mot "semantic: " pour CHANGELOG
 * overides/ dans sous dossier docs/includes/
 * ppp_macros/ dans sous dossier docs/includes/macros/
@@ -27,8 +28,10 @@ author: GC7
 
 ---
 
-## Done
+## Done (Du + récent au + ancien)
 
+* Accepter autres mots pour semantic-release: up, chore, docs, etc...
+* Un seul script pour der déploy (Actuellement duplication dans le workflow des push / main et celui du CRON quotidien... :-(...)
 * Ajout d'une page qui liste automatiquement tous les changements, validés par un push sur la branche main, et calcule en conséquence le numéro de version ([CHANGELOG](CHANGELOG.md)) du projet.
 * Ajout d'un fichier .gitignore pour éviter que les fichiers temporaires ne soient ajoutés au dépôt.
 * Ajout d'un fichier README.md (Pour le dépôt) pour expliquer comment utiliser ce projet.
