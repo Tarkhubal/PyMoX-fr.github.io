@@ -72,6 +72,8 @@ print(*[rd.randint(1,10) for _ in range(7)])"
     
     ... Et quand de cela lassé tu es aussi, utilises le lien ci-dessous pour rester *On line*<sup>*</sup> (Et du coup, plus jamais ainsi dans la boucle tu seras 😉 !)
     
+    <!-- * [ ] Ici page pour aller + loin: git, vsc/todos etc...-->
+    
     \* En ligne
     
 [^1]: Hot-reload = Rafraîchissement automatique (On dit aussi "Live reload")
