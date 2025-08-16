@@ -87,7 +87,14 @@ jobs:
       - name: 🚀 Déploie vers gh-pages
         run: mkdocs gh-deploy --force
 
+        
       - name: 🧲 Pousse les rapports dans 🌿 gh-pages/reports
+        # 🧭 Note sur le double déploiement qu'engendre ce script :
+        # Cette étape pousse les rapports markdown dans gh-pages/reports/
+        # Elle déclenche un second déploiement GitHub Pages car chaque push sur gh-pages est traité.
+        # Ce comportement est volontaire : le premier déploiement publie le site HTML via MkDocs,
+        # le second enrichit la branche avec les rapports techniques en markdown.
+        # Les deux sont nécessaires pour un site complet et à jour.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
