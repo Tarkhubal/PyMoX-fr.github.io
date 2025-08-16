@@ -33,7 +33,7 @@ _build/
 /docs/versions.json
 
 /docs/outils/logs/CHANGELOG.md
-/docs/outils/logs/hebdo.md
+# /docs/outils/logs/hebdo.md
 
 # Généré par les workflows (push, dayly, hebdo)
 /docs/outils/logs/deploy_info.md 
