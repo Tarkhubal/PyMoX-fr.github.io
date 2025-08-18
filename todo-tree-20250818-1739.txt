@@ -1,0 +1,51 @@
+└─ GH
+   ├─ 2fix
+   │  ├─ pain.md
+   │  │  └─ line 38: éviter dupli de ce bloc (idem page Crêpes)
+   │  └─ extensions.md
+   │     └─ line 10: just pour test
+   ├─ 2dbug
+   │  └─ extensions.md
+   │     └─ line 9: just pour test
+   └─ * [ ]
+      ├─ index.md
+      │  └─ line 75: Ici page pour aller + loin: git, vsc/todos etc...
+      ├─ cpp.md
+      │  └─ line 13: Benchmark C++
+      ├─ mojo.md
+      │  └─ line 4: Icone + Doc Mojo
+      ├─ admonitions.md
+      │  ├─ line 42: Recherche pour ajouter fonction cliquer pour 'Copier' (Dans le clipboard)
+      │  └─ line 44: → Déplacer le title sur le centre du texte ?
+      ├─ last_commits.md
+      │  └─ line 17: Coder API // 10 der commits
+      ├─ todo.md
+      │  └─ line 10: lien VSC - ToDO Ext.) !
+      ├─ todo_original.md
+      │  ├─ line 10: lien VSC - ToDO Ext.) !
+      │  └─ line 19: Add compteur et liste dynamiques des ToDos (Conserver disclaimer ci-dessus)
+      ├─ daily.md
+      │  └─ line 4: Icone + Explications du rôle de ce workflow
+      ├─ hebdo.md
+      │  └─ line 4: Icone + Explications du rôle de ce workflow
+      ├─ push.md
+      │  └─ line 4: Explications du rôle de ce workflow
+      ├─ fletx.md
+      │  └─ line 4: Icone + Doc Flet/FletX
+      ├─ php.md
+      │  └─ line 4: Icone + Doc PHP
+      ├─ python.md
+      │  └─ line 4: Icone + Doc Py
+      ├─ sql.md
+      │  └─ line 4: Icone + Doc SQL
+      ├─ main.html
+      │  └─ line 3: Comprendre: Pour indiquer le numéro de version en pied de page
+      ├─ mkdocs.yml
+      │  ├─ line 192: à tester git-revision-date-localized
+      │  └─ line 224: Refaire scritp mots sémantiques suppl pour semantic-release (up, chore, fix, feat, etc...)
+      ├─ avenir.md
+      │  ├─ line 24: Mise en place de l'App de **PyMoX** - v 0.0.1
+      │  ├─ line 25: Mise en place du site web [**PyMoX.fr**](http://www.PyMoX.fr)- v 0.0.1
+      │  └─ line 26: Mettre en place ce genre de test
+      └─ scan_todos.py
+         └─ line 363: lien VSC - ToDO Ext.) !"

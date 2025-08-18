@@ -3,7 +3,7 @@ name: Deploy Docs (CRON à ≃ 3h00)
 on:
   schedule:
     - cron: "0 1 * * *" # Tous les jours à 3h (GMT) du matin
-      
+
     # - cron: '0 * * * *' # Toutes les heures
     # - cron: '*/15 * * * *' # Toutes les 15 minutes
     # - cron: "*/5 * * * *" # Toutes les 5 minutes
@@ -29,7 +29,7 @@ jobs:
 
       # Récupération des rapports depuis gh-pages/reports
       - name: 🧲 Récupérer les rapports depuis gh-pages/reports
-        run: python resources/auto/subs/get_reports.py --files CHANGELOG.md hebdo.md versions.json
+        run: python resources/auto/subs/get_reports.py --files CHANGELOG.md hebdo.md versions.json todo.md
         # Cette étape assure que nous utilisons toujours les rapports les plus récents
 
       - name: 📋 Génère deploy_info.md
@@ -46,7 +46,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          FILES_TO_SAVE: "CHANGELOG.md hebdo.md versions.json deploy_info.md"
+          FILES_TO_SAVE: "CHANGELOG.md hebdo.md versions.json deploy_info.md todo.md"
         run: |
           python resources/auto/subs/push_reports.py \
             --files ${FILES_TO_SAVE} \

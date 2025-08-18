@@ -3,6 +3,8 @@ import re
 import fnmatch
 import argparse
 from collections import defaultdict
+from datetime import datetime
+import pytz
 
 # Extensions de fichiers à scanner (élargi selon votre demande)
 SCAN_EXT = {
@@ -65,8 +67,9 @@ DEFAULT_EXCLUDES = [
     "t/todos.py",
     "t/README_todos.md",
     "t/CHANGELOG_todos.md",
-    # Exclure les fichiers de résultats TODO Tree
+    # Exclure les fichiers de résultats TODO Tree et le fichier todo.md généré
     "todo-tree*.txt",
+    "docs/outils/logs/todo.md",
 ]
 
 # Tags selon votre liste exacte avec regex plus flexibles
@@ -126,12 +129,17 @@ def is_excluded(path, exclude_globs):
     return False
 
 
-def find_todos(root=".", settings_path=None):
+def find_todos(root=".", settings_path=None, include_static_todo_md=False):
     todos = []
     counts = defaultdict(int)
 
     # Utiliser les exclusions par défaut + celles de VSCode si disponibles
     exclude_globs = DEFAULT_EXCLUDES.copy()
+
+    # Si on veut inclure le TODO statique de todo.md, on retire cette exclusion
+    if include_static_todo_md and "docs/outils/logs/todo.md" in exclude_globs:
+        exclude_globs.remove("docs/outils/logs/todo.md")
+
     if settings_path:
         vscode_excludes = load_excludes(settings_path)
         exclude_globs.extend(vscode_excludes)
@@ -162,6 +170,15 @@ def find_todos(root=".", settings_path=None):
             try:
                 with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
                     for i, line in enumerate(f, start=1):
+                        # Si c'est le fichier todo.md et qu'on inclut seulement la partie statique
+                        if (
+                            include_static_todo_md
+                            and rel_file == "docs/outils/logs/todo.md"
+                        ):
+                            # Ne scanner que les lignes 1-20 (partie statique)
+                            if i > 20:
+                                break
+
                         # Ignorer les lignes de code/exemples qui ne sont pas de vrais TODOs
                         line_lower = line.lower().strip()
 
@@ -178,6 +195,45 @@ def find_todos(root=".", settings_path=None):
                                 "afficher seulement",
                                 ": 4 ,",  # Ligne de comptage dans txt.md
                                 "1 dbug, 1 2ar",  # Ligne de comptage
+                                # Ignorer les définitions de regex et commentaires dans le code
+                                "# à solutionner",
+                                "# oki2",
+                                "# à enlever",
+                                "# à voir",
+                                "# à faire",
+                                "# à laisser",
+                                "# urgent",
+                                "# important",
+                                "# moyen",
+                                "# faible",
+                                "# en cours",
+                                "# tâches",
+                                "# bugs",
+                                "# nettoyage",
+                                "# vérifier",
+                                "# travail actuel",
+                                "# planifiées",
+                                "# générales",
+                                "# examiner",
+                                "# peut attendre",
+                                "priority_order",
+                                "tag_regexes",
+                                "emoji =",
+                                # Ignorer les lignes de code spécifiques
+                                'if tag in ["2fix"',
+                                'elif tag in ["2dbug"',
+                                'elif tag in ["* [ ]"',
+                                '"2ar"]:',
+                                '"* [/]"]:',
+                                '"2see"]:',
+                                'tag in ["2fix", "2ar"]',
+                                'tag in ["2dbug", "* [/]"]',
+                                'tag in ["* [ ]", "2do", "2see"]',
+                                # Exclure les TODOs générés dynamiquement dans todo.md
+                                "occurrences)",
+                                "dernier rapport généré",
+                                "trouvés dans le projet",
+                                "résumé des todos par type",
                             ]
                         ):
                             continue
@@ -270,6 +326,153 @@ def print_results(todos, counts):
     print("+" + "-" * 12 + "+" + "-" * 8 + "+")
     print(f"| {'TOTAL':<10} | {sum(counts.values()):<6} |")
     print("+" + "-" * 12 + "+" + "-" * 8 + "+")
+
+
+def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.md"):
+    """Génère un rapport markdown des TODOs trouvés."""
+
+    # Obtenir la date et l'heure actuelles en timezone Paris
+    paris_tz = pytz.timezone("Europe/Paris")
+    now_local = datetime.now(paris_tz)
+    date_rapport_txt = (
+        f"Dernier rapport généré le {now_local.strftime('%d/%m/%Y à %H:%M')}"
+    )
+
+    # Créer le répertoire de destination s'il n'existe pas
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+    # Grouper par tag pour un affichage organisé (on garde tous les TODOs)
+    todos_by_tag = defaultdict(list)
+    for todo in todos:
+        todos_by_tag[todo["tag"]].append(todo)
+
+    # Générer le contenu markdown
+    lines = []
+    lines.append("---")
+    lines.append("title: 📋 À faire (To Do list)")
+    lines.append("author: GC7")
+    lines.append("---")
+    lines.append("")
+    lines.append("???+ notice")
+    lines.append("")
+    lines.append(
+        "    Même cette page, vous pouvez la modifier avec le bouton en haut, à droite, et ainsi ajouter / modifier / supprimer à volonté, des tâches à faire... Comme toutes les pages du site, elle évolue selon vos actions et/ou réactions."
+    )
+    lines.append("")
+    lines.append(
+        "    Et si le :heart: vous en dit, vous pouvez même tâcher d'en réaliser l'une d'elles (Voir liste ci-dessous) !"
+    )
+    lines.append("    ")
+    lines.append("    N'oubliez-pas !:")
+    lines.append("    ")
+    lines.append(
+        "    - Pour toutes questions ou suggestions, merci de créer une [issue sur GitHub](https://github.com/PyMoX-fr/PyMoX-fr.github.io/issues) :smiley:"
+    )
+    lines.append(
+        "    - Si vous avez une question, n'hésitez pas à nous contacter selon l'heure peut-être alors en LIVE, via [le canal Discord des passionnés de Python francophones, PyPRO !](https://discord.com/channels/1056923339546968127/1075041467690664070) :wink:"
+    )
+    lines.append("")
+    lines.append("## To do")
+    lines.append("")
+    lines.append(f"<!-- {date_rapport_txt} -->")
+    lines.append("")
+
+    # Calculer le nombre de TODOs sans le TODO statique pour l'affichage
+    display_count = len(todos)
+    display_counts = counts.copy()
+
+    # Vérifier si le TODO statique est présent et l'exclure du comptage d'affichage
+    for todo in todos:
+        if todo["file"] == "docs/outils/logs/todo.md" and todo["line"] == 10:
+            display_count -= 1
+            display_counts[todo["tag"]] -= 1
+            break
+
+    if not todos:
+        lines.append("✅ **Aucun TODO trouvé dans le projet !**")
+        lines.append("")
+    else:
+        lines.append(f"📌 **{display_count} TODOs trouvés dans le projet :**")
+        lines.append("")
+
+        # Afficher chaque tag avec ses occurrences dans l'ordre de priorité
+        for tag in PRIORITY_ORDER:
+            if tag in todos_by_tag:
+                tag_todos = todos_by_tag[tag]
+                # Emoji selon la priorité
+                if tag in ["2fix", "2ar"]:
+                    emoji = "🚨"  # URGENT
+                elif tag in ["2dbug", "* [/]"]:
+                    emoji = "⚠️"  # IMPORTANT
+                elif tag in ["* [ ]", "2do", "2see"]:
+                    emoji = "📋"  # MOYEN
+                else:
+                    emoji = "💤"  # FAIBLE
+
+                lines.append(
+                    f"### {emoji} {tag} ({len(tag_todos)} occurrence{'s' if len(tag_todos) > 1 else ''})"
+                )
+                lines.append("")
+
+                for todo in tag_todos:
+                    # Filtrer le TODO statique du fichier todo.md pour éviter la duplication
+                    if (
+                        todo["file"] == "docs/outils/logs/todo.md"
+                        and todo["line"] == 10
+                    ):
+                        continue
+
+                    tag_text = todo["tag_text"]
+                    file_path = todo["file"]
+                    line_num = todo["line"]
+
+                    if tag_text:
+                        lines.append(f"- **{file_path}:{line_num}** → {tag_text}")
+                    else:
+                        lines.append(f"- **{file_path}:{line_num}** → {todo['text']}")
+                lines.append("")
+
+        # Tableau résumé
+        lines.append("### 📊 Résumé des TODOs par type")
+        lines.append("")
+        lines.append("| Tag | Count |")
+        lines.append("|-----|-------|")
+
+        for tag in PRIORITY_ORDER:
+            if tag in display_counts and display_counts[tag] > 0:
+                count = display_counts[tag]
+                lines.append(f"| `{tag}` | {count} |")
+
+        lines.append(f"| **TOTAL** | **{sum(display_counts.values())}** |")
+        lines.append("")
+
+    lines.append("---")
+    lines.append("")
+    lines.append("## Done (Du + récent au + ancien)")
+    lines.append("")
+    lines.append(
+        "* Accepter autres mots pour semantic-release: up, chore, docs, etc..."
+    )
+    lines.append(
+        "* Un seul script pour der déploy (Actuellement duplication dans le workflow des push / main et celui du CRON quotidien... :-(...)"
+    )
+    lines.append(
+        "* Ajout d'une page qui liste automatiquement tous les changements, validés par un push sur la branche main, et calcule en conséquence le numéro de version ([CHANGELOG](CHANGELOG.md)) du projet."
+    )
+    lines.append(
+        "* Ajout d'un fichier .gitignore pour éviter que les fichiers temporaires ne soient ajoutés au dépôt."
+    )
+    lines.append(
+        "* Ajout d'un fichier README.md (Pour le dépôt) pour expliquer comment utiliser ce projet."
+    )
+    lines.append("")
+
+    # Écrire le fichier
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+
+    print(f"✅ Rapport TODO généré : {output_path}")
+    return output_path
 
 
 def main():

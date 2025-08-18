@@ -63,8 +63,8 @@ jobs:
       #     else
       #       echo "⚠️ La branche gh-pages n'existe pas encore"
       #     fi
-      - name: 🧲 Récupérer le dernier CHANGELOG et versions depuis gh-pages/reports
-        run: python resources/auto/subs/get_reports.py --files CHANGELOG.md versions.json
+      - name: 🧲 Récupérer le dernier CHANGELOG, versions et todo depuis gh-pages/reports
+        run: python resources/auto/subs/get_reports.py --files CHANGELOG.md versions.json todo.md
         # Utilise le script optimisé pour récupérer les fichiers depuis gh-pages/reports
 
       - name: 📋 Génère deploy_info.md
@@ -129,7 +129,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          FILES_TO_SAVE: "CHANGELOG.md versions.json hebdo.md"
+          FILES_TO_SAVE: "CHANGELOG.md versions.json hebdo.md todo.md"
         run: |
           python resources/auto/subs/push_reports.py \
             --files ${FILES_TO_SAVE} \

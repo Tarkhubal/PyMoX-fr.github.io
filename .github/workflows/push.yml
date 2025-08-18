@@ -4,7 +4,6 @@ on:
   push:
     branches: [main]
 
-    
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
@@ -22,9 +21,7 @@ jobs:
 
       - name: 🛠️ Installer les dépendances via script Python
         run: python resources/auto/subs/install_deps.py
-        
-        
-        
+
       - name: Check semantic-release version
         run: semantic-release --version
 
@@ -34,19 +31,17 @@ jobs:
           echo "Commits depuis le dernier tag :"
           git log --oneline $(git describe --tags --abbrev=0)..HEAD
 
-        
-
       # - name: Run semantic-release
       #   env:
       #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   run: |
       #     # Calcule la nouvelle version si mot semantic
-          
+
       #     # -v = verbose -- Max : -vvv = very very verbose
-      #     semantic-release version  
-          
+      #     semantic-release version
+
       #     semantic-release publish
-          
+
       - name: Run python-semantic-release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -54,14 +49,12 @@ jobs:
           python -m semantic_release version
           python -m semantic_release publish
 
-    
       # - name: 🔢 Affiche la version générée
       #   run: git describe --tags --abbrev=0
-        
+
       - name: 🔢 Affiche la version générée (avec le commit)
         run: git show $(git describe --tags --abbrev=0) --oneline
 
-        
       # - name: 📦 List installed packages
       #   run: pip freeze
 
@@ -70,6 +63,9 @@ jobs:
 
       - name: 📋 Génère deploy_info.md
         run: python resources/auto/gen_deploy_info.py --mode manual
+
+      - name: 📝 Génère todo.md
+        run: python resources/auto/gen_todos.py
 
       # Récupération du rapport hebdomadaire le plus récent depuis gh-pages/reports
       - name: 🧲 Récupérer le dernier rapport hebdomadaire depuis gh-pages/reports
@@ -87,7 +83,6 @@ jobs:
       - name: 🚀 Déploie vers gh-pages
         run: mkdocs gh-deploy --force
 
-        
       - name: 🧲 Pousse les rapports dans 🌿 gh-pages/reports
         # 🧭 Note sur le double déploiement qu'engendre ce script :
         # Cette étape pousse les rapports markdown dans gh-pages/reports/
@@ -98,7 +93,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          FILES_TO_SAVE: "CHANGELOG.md hebdo.md versions.json"
+          FILES_TO_SAVE: "CHANGELOG.md hebdo.md versions.json todo.md"
         run: |
           python resources/auto/subs/push_reports.py \
             --files ${FILES_TO_SAVE} \

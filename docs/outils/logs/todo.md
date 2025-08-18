@@ -7,7 +7,7 @@ author: GC7
 
     Même cette page, vous pouvez la modifier avec le bouton en haut, à droite, et ainsi ajouter / modifier / supprimer à volonté, des tâches à faire... Comme toutes les pages du site, elle évolue selon vos actions et/ou réactions.
 
-    Et si le :heart: vous en dit, vous pouvez même tâcher d'en réaliser l'une d'elles (Voir # * [ ] lien VSC - ToDO Ext.) !
+    Et si le :heart: vous en dit, vous pouvez même tâcher d'en réaliser l'une d'elles (Voir liste ci-dessous) !
     
     N'oubliez-pas !:
     
@@ -16,15 +16,52 @@ author: GC7
 
 ## To do
 
-→ # * [ ] Add compteur et liste dynamiques des ToDos (Conserver disclaimer ci-dessus)
-  Suppr liste ci-dessous, chaque tâche ici insérée à sa bonne place
+<!-- Dernier rapport généré le 18/08/2025 à 21:37 -->
 
-* Set MAJ after mot "semantic: " pour CHANGELOG
-* overides/ dans sous dossier docs/includes/
-* ppp_macros/ dans sous dossier docs/includes/macros/
-* vider ppp_a_trier/
-* Ajout d'un fichier CONTRIBUTING.md, compris les bases d'utilisation du Git, pour expliquer comment contribuer efficacement au projet.
-* Mettre en place les benchmarks réalisés (C++, Mojo, etc...).
+📌 **25 TODOs trouvés dans le projet :**
+
+### 🚨 2fix (2 occurrences)
+
+- **docs/divers/pain.md:38** → éviter dupli de ce bloc (idem page Crêpes) -->
+- **docs/outils/technos/env/vsc/extensions.md:10** → just pour test
+
+### ⚠️ 2dbug (1 occurrence)
+
+- **docs/outils/technos/env/vsc/extensions.md:9** → just pour test
+
+### 📋 * [ ] (22 occurrences)
+
+- **mkdocs.yml:192** → à tester git-revision-date-localized
+- **mkdocs.yml:224** → Refaire scritp mots sémantiques suppl pour semantic-release (up, chore, fix, feat, etc...)
+- **docs/index.md:75** → Ici page pour aller + loin: git, vsc/todos etc...-->
+- **docs/outils/benchmarks/cpp.md:13** → Benchmark C++
+- **docs/outils/benchmarks/mojo.md:13** → Benchmark Mojo
+- **docs/outils/essais/admonitions.md:42** → Recherche pour ajouter fonction cliquer pour 'Copier' (Dans le clipboard)
+- **docs/outils/essais/admonitions.md:44** → → Déplacer le title sur le centre du texte ?
+- **docs/outils/logs/last_commits.md:17** → Coder API // 10 der commits
+- **docs/outils/logs/todo_original.md:10** → lien VSC - ToDO Ext.) !
+- **docs/outils/logs/todo_original.md:19** → Add compteur et liste dynamiques des ToDos (Conserver disclaimer ci-dessus)
+- **docs/outils/technos/backend/workflows/daily.md:4** → Icone + Explications du rôle de ce workflow -->
+- **docs/outils/technos/backend/workflows/hebdo.md:4** → Icone + Explications du rôle de ce workflow -->
+- **docs/outils/technos/backend/workflows/push.md:4** → Explications du rôle de ce workflow -->
+- **docs/outils/technos/languages/fletx.md:4** → Icone + Doc Flet/FletX -->
+- **docs/outils/technos/languages/mojo.md:4** → Icone + Doc Mojo -->
+- **docs/outils/technos/languages/php.md:4** → Icone + Doc PHP -->
+- **docs/outils/technos/languages/python.md:4** → Icone + Doc Py -->
+- **docs/outils/technos/languages/sql.md:4** → Icone + Doc SQL -->
+- **includes/overrides/main.html:3** → Comprendre: Pour indiquer le numéro de version en pied de page
+- **ppp_a_trier/avenir.md:24** → Mise en place de l'App de **PyMoX** - v 0.0.1
+- **ppp_a_trier/avenir.md:25** → Mise en place du site web [**PyMoX.fr**](http://www.PyMoX.fr)- v 0.0.1
+- **ppp_a_trier/avenir.md:26** → Mettre en place ce genre de test
+
+### 📊 Résumé des TODOs par type
+
+| Tag | Count |
+|-----|-------|
+| `2fix` | 2 |
+| `2dbug` | 1 |
+| `* [ ]` | 22 |
+| **TOTAL** | **25** |
 
 ---
 
