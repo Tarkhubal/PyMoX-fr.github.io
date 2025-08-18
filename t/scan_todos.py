@@ -172,8 +172,8 @@ def find_todos(root=".", settings_path=None):
                                 "python scan_todos",
                                 "| tag",
                                 "+-",
-                                'r"',
-                                "r'",
+                                'r".*',  # Regex dans le code (plus spécifique)
+                                "r'.*",  # Regex dans le code (plus spécifique)
                                 "tags recherchés",
                                 "afficher seulement",
                                 ": 4 ,",  # Ligne de comptage dans txt.md
