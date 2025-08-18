@@ -16,7 +16,7 @@ author: GC7
 
 ## To do
 
-→ //* [ ] Add compteur et liste dynamiques des ToDos (Conserver disclaimer ci-dessus)
+→ # * [ ] Add compteur et liste dynamiques des ToDos (Conserver disclaimer ci-dessus)
   Suppr liste ci-dessous, chaque tâche ici insérée à sa bonne place
 
 * Set MAJ after mot "semantic: " pour CHANGELOG

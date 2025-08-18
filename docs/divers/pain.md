@@ -35,6 +35,8 @@ title:  🥖 Pain
 
 ---
 
+<!-- 2fix éviter dupli de ce bloc (idem page Crêpes) -->
+
 ???+ abstract "Principe de Collaboration 🛠️ 🧰 🧵 🧪"
     
     * → Un à 3 ajouts et/ou modifications max par commit et par jour
