@@ -396,7 +396,7 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
         lines.append("✅ **Aucun TODO trouvé dans le projet !**")
         lines.append("")
     else:
-        lines.append(f"## 📌 **{display_count} TODOs trouvés dans le projet :**")
+        lines.append(f"## 📌 **{display_count} TODOs trouvés dans le projet**")
         lines.append("")
 
         for tag in PRIORITY_ORDER:

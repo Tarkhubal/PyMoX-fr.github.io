@@ -32,12 +32,12 @@ _build/
 
 /docs/versions.json
 
-/docs/outils/logs/CHANGELOG.md
-# /docs/outils/logs/hebdo.md
 
 # Généré par les workflows (push, dayly, hebdo)
+/docs/outils/logs/CHANGELOG.md
 /docs/outils/logs/deploy_info.md 
 /docs/outils/logs/todo.md 
+/docs/outils/logs/hebdo.md
 
 # Pour faire oublier un fichier déjà commité
 # git rm --cached docs/outils/logs/todo.md
