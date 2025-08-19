@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.0.2 (2025-08-19)
+
+### Up
+
+- Dynamic ToDo page
+  ([`8b2459f`](https://github.com/PyMoX-fr/PyMoX-fr.github.io/commit/8b2459f43c1ebe4bd4c73b6e5ed669fd23a62604))
+
+
 ## v1.1.0 (2025-08-19)
 
 ### Upgrade
