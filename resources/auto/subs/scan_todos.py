@@ -95,9 +95,9 @@ PRIORITY_ORDER = [
     "2let",  # FAIBLE - à laisser (peut attendre)
 ]
 
-# 2fix use TAG List pour définir l'ordre de priorité des TAGs
+# 2dbug use TAG List pour définir l'ordre de priorité des TAGs
 
-# [ ] Permettre tri de chaque tâche par drag & drop
+# * [ ] Permettre tri de chaque tâche par drag & drop
 
 
 def load_excludes(settings_path):
@@ -276,7 +276,7 @@ def print_results(todos, counts):
         return
 
     print(f"📌 {len(todos)} TODOs trouvés dans le projet\n")
-    
+
     # Grouper par tag pour un affichage organisé
     todos_by_tag = defaultdict(list)
     for todo in todos:
@@ -335,9 +335,7 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
     # Obtenir la date et l'heure actuelles en timezone Paris
     paris_tz = pytz.timezone("Europe/Paris")
     now_local = datetime.now(paris_tz)
-    date_rapport_txt = (
-        f"Liste générée le {now_local.strftime('%d/%m/%Y à %H:%M')}"
-    )
+    date_rapport_txt = f"Liste générée le {now_local.strftime('%d/%m/%Y à %H:%M')}"
 
     # Créer le répertoire de destination s'il n'existe pas
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -370,11 +368,9 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
         "    - Pour toutes questions ou suggestions, merci de créer une [issue sur GitHub](https://github.com/PyMoX-fr/PyMoX-fr.github.io/issues) :smiley:"
     )
     lines.append(
-        "    - Si vous avez une question, n'hésitez pas à nous contacter selon l'heure peut-être alors en LIVE, via [le canal Discord des passionnés de Python francophones, PyPRO ![logoPyPRO](/assets/images/pypro_icon.png) ](https://discord.com/channels/1056923339546968127/1075041467690664070)"
+        "    - Si vous avez une question, n'hésitez pas à nous contacter selon l'heure peut-être alors en LIVE, via [le canal Discord des passionnés de Python francophones, PyPRO ![logoPyPRO](../../assets/images/pypro_icon.png) ](https://discord.com/channels/1056923339546968127/1075041467690664070)"
     )
-    lines.append(
-        "    ---"
-    )
+    lines.append("    ---")
     lines.append(
         "    Comme toutes les pages du site, celle-ci évolue selon vos actions et/ou réactions :wink:"
     )
@@ -405,16 +401,16 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
                 # Emoji selon la priorité
                 if tag in ["2fix", "2ar"]:
                     emoji = "🚨"  # URGENT
-                    color= 'danger'
+                    color = "danger"
                 elif tag in ["2dbug", "* [/]"]:
                     emoji = "⚠️"  # IMPORTANT
-                    color= 'warning'
+                    color = "warning"
                 elif tag in ["* [ ]", "2do"]:
                     emoji = "📋"  # MOYEN
-                    color= 'abstract'
+                    color = "abstract"
                 else:
                     emoji = "💤"  # FAIBLE
-                    color= 'info'
+                    color = "info"
 
                 lines.append(f'???+ {color} "{tag} ({len(tag_todos)}) {emoji}"')
                 lines.append("")
@@ -434,7 +430,9 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
                     if tag_text:
                         lines.append(f"    - **{file_path}:{line_num}** → {tag_text}")
                     else:
-                        lines.append(f"    - **{file_path}:{line_num}** → {todo['text']}")
+                        lines.append(
+                            f"    - **{file_path}:{line_num}** → {todo['text']}"
+                        )
                 lines.append("")
 
         # Tableau résumé
@@ -451,8 +449,8 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
         lines.append(f"| **TOTAL** | **{sum(display_counts.values())}** |")
         lines.append("")
         lines.append(
-                f"<div style='text-align: right; color: gray; font-size: 16px; line-height: 0;'>📋 <span style='font-style: italic;'>{date_rapport_txt}</span>.</div>\n"
-            )
+            f"<div style='text-align: right; color: gray; font-size: 16px; line-height: 0;'>📋 <span style='font-style: italic;'>{date_rapport_txt}</span>.</div>\n"
+        )
 
         lines.append("")
 
@@ -507,7 +505,8 @@ Exemples d'utilisation:
 
     # Chemin vers les settings VSCode (optionnel)
     settings_path = (
-        args.settings or r"C:\\Users\\utilisateur\\AppData\\Roaming\\Code\\User\\settings.json"
+        args.settings
+        or r"C:\\Users\\utilisateur\\AppData\\Roaming\\Code\\User\\settings.json"
     )
 
     if not args.summary_only:
@@ -554,6 +553,7 @@ Exemples d'utilisation:
             print("✅ Aucun TODO trouvé")
     else:
         print_results(todos, counts)
+
 
 if __name__ == "__main__":
     main()
