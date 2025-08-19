@@ -25,4 +25,4 @@ Bon appétit 😊 !
 
 ---
 
---8<-- "includes/partials/collaboration.md"
+{{ collaboration_block("Collaboration Crêpière 🪙 👩‍🍳 🤝") }}

@@ -35,4 +35,4 @@ title:  🥖 Pain
 
 ---
 
---8<-- "includes/partials/collaboration.md"
+{{ collaboration_block("Collaboration Boulangère 🥖 👨‍🍳 🤝") }}

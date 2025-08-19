@@ -86,11 +86,12 @@ markdown_extensions:
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite # pour  `#!python  <python en ligne>`
-  
+
   - pymdownx.snippets:
       base_path: docs/
-      check_paths: true
-       # Inclusion de fichiers externe.
+      check_paths:
+        true
+        # Inclusion de fichiers externe.
   - pymdownx.tasklist: # Cases à cocher  - [ ]  et - [x]
       custom_checkbox: false #   avec cases d'origine
       clickable_checkbox: true #   et cliquables.
@@ -105,9 +106,10 @@ markdown_extensions:
   - pymdownx.emoji: # Émojis  :boom:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+        # - pymdownx.blocks.admonition
+        # - pymdownx.blocks.details
 
-  # - pymdownx.blocks.admonition
-  # - pymdownx.blocks.details
+
   - pymdownx.blocks.details:
       types:
         - name: unreleased-block
@@ -120,11 +122,11 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-          
-        # Option pour désactiver le label "Text Only"
-        # - pymdownx.blocks:
-        #     details:
-        #       text_only_label: false
+            # Option pour désactiver le label "Text Only"
+            # - pymdownx.blocks:
+            #     details:
+            #       text_only_label: false
+
 
   - pymdownx.arithmatex:
       generic: true
@@ -182,10 +184,10 @@ plugins:
   # - tags:
   #     tags_file: tags.md # Déprécié
   - tags
-  
+
   # - mkdocs-material
   # - mkdocs-pymdownx
-  
+
   - pyodide_macros:
       # Vous pouvez ajouter ici tout réglage que vous auriez ajouté concernant les macros:
       on_error_fail: true # Il est conseillé d'ajouter celui-ci si vous ne l'utilisez pas.
@@ -205,7 +207,7 @@ plugins:
       # - macros_pymox.all_citations
   # - changelog: [ ] to do
   #     file: docs/changelog.yml
-      
+
   # - macros:
 
 # En remplacement de mkdocs-exclude. Tous les fichiers correspondant aux patterns indiqués seront
