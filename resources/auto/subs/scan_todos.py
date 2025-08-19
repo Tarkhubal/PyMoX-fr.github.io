@@ -65,6 +65,7 @@ DEFAULT_EXCLUDES = [
     "t/CHANGELOG_todos.md",
     # Exclure les fichiers de résultats TODO Tree et le fichier todo.md généré
     "todo-tree*.txt",
+    "docs/outils/logs/CHANGELOG.md",
     "docs/outils/logs/todo.md",
 ]
 
@@ -369,7 +370,7 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
         "    - Pour toutes questions ou suggestions, merci de créer une [issue sur GitHub](https://github.com/PyMoX-fr/PyMoX-fr.github.io/issues) :smiley:"
     )
     lines.append(
-        "    - Si vous avez une question, n'hésitez pas à nous contacter selon l'heure peut-être alors en LIVE, via [le canal Discord des passionnés de Python francophones, PyPRO !](https://discord.com/channels/1056923339546968127/1075041467690664070) ![logo](https:pymox.fr/assets/images/pypro.png)"
+        "    - Si vous avez une question, n'hésitez pas à nous contacter selon l'heure peut-être alors en LIVE, via [le canal Discord des passionnés de Python francophones, PyPRO ![logoPyPRO](/assets/images/pypro_icon.png) ](https://discord.com/channels/1056923339546968127/1075041467690664070)"
     )
     lines.append(
         "    ---"

@@ -12,17 +12,17 @@ author: GC7
     Enfin, n'oubliez-pas ! :
     
     - Pour toutes questions ou suggestions, merci de créer une [issue sur GitHub](https://github.com/PyMoX-fr/PyMoX-fr.github.io/issues) :smiley:
-    - Si vous avez une question, n'hésitez pas à nous contacter selon l'heure peut-être alors en LIVE, via [le canal Discord des passionnés de Python francophones, PyPRO !](https://discord.com/channels/1056923339546968127/1075041467690664070) ![logo](https:pymox.fr/assets/images/pypro.png)
+    - Si vous avez une question, n'hésitez pas à nous contacter selon l'heure peut-être alors en LIVE, via [le canal Discord des passionnés de Python francophones, PyPRO ![logoPyPRO](/assets/images/pypro_icon.png) ](https://discord.com/channels/1056923339546968127/1075041467690664070)
     ---
     Comme toutes les pages du site, celle-ci évolue selon vos actions et/ou réactions :wink:
 
-<!-- Dernier rapport généré le 19/08/2025 à 08:32 -->
+<!-- Dernier rapport généré le 19/08/2025 à 08:53 -->
 ## 📌 **16 TODOs trouvés dans le projet :**
 
 ### 🚨 2fix (2)
 
 - **docs/divers/pain.md:38** → éviter dupli de ce bloc (idem page Crêpes) -->
-- **resources/auto/subs/scan_todos.py:97** → use TAG List pour définir l'ordre de priorité des TAGs
+- **resources/auto/subs/scan_todos.py:98** → use TAG List pour définir l'ordre de priorité des TAGs
 
 ### 📋 * [ ] (13)
 
@@ -38,7 +38,7 @@ author: GC7
 - **docs/outils/technos/languages/php.md:4** → Icone + Doc PHP -->
 - **docs/outils/technos/languages/python.md:4** → Icone + Doc Py -->
 - **docs/outils/technos/languages/sql.md:4** → Icone + Doc SQL -->
-- **resources/auto/subs/scan_todos.py:182** → Délimiter avec '< !-- ZYXCBA -->' plutôt que le numéro ligne
+- **resources/auto/subs/scan_todos.py:183** → Délimiter avec '< !-- ZYXCBA -->' plutôt que le numéro ligne
 
 ### 📋 2see (1)
 
