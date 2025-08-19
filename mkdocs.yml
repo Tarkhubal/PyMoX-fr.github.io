@@ -189,7 +189,7 @@ plugins:
         # python_libs:
         #   - turtle
         tab_to_spaces: 4
-        # - git-revision-date-localized # * [ ] à tester git-revision-date-localized
+        # - git-revision-date-localized # 2see à tester git-revision-date-localized
       # - sqlite-console
       # module_name: macros_pymox/one_citation_a_day
       module_name:
@@ -220,6 +220,3 @@ extra_javascript:
 extra_css:
   - xtra/stylesheets/essais.css # ajustements
   - xtra/stylesheets/ajustements.css # ajustements
-
-# * [ ] Refaire scritp mots sémantiques suppl pour semantic-release (up, chore, fix, feat, etc...)
-

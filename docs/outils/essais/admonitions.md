@@ -39,10 +39,6 @@ Content 2
 
 <hr>
 
-* [ ] Recherche pour ajouter fonction cliquer pour 'Copier' (Dans le clipboard)
-
-* [ ] → Déplacer le title sur le centre du texte ?
-
 <div class="copy-target" data-copy title="">
   Exemple de texte que l'on veut pouvoir cliquer pour être copié dans le presse-papier.
 </div>

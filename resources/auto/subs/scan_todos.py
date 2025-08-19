@@ -1,10 +1,6 @@
-import os
-import re
-import fnmatch
-import argparse
+import os, re, fnmatch, argparse, pytz
 from collections import defaultdict
 from datetime import datetime
-import pytz
 
 # Extensions de fichiers à scanner (élargi selon votre demande)
 SCAN_EXT = {
@@ -100,6 +96,8 @@ PRIORITY_ORDER = [
 
 # 2fix use TAG List pour définir l'ordre de priorité des TAGs
 
+# [ ] Permettre tri de chaque tâche par drag & drop 
+
 
 def load_excludes(settings_path):
     """Récupère la liste des excludeGlobs sans parser tout le settings.json."""
@@ -178,10 +176,10 @@ def find_todos(root=".", settings_path=None, include_static_todo_md=False):
                             and rel_file == "docs/outils/logs/todo.md"
                         ):
                             # Ne scanner que les lignes 1-20 (partie statique)
-                            if i > 21:
+                            if i > 16:
                                 break
 
-                            # * [ ] Délimiter avec '<!-- ZYXCBA -->' plutôt que le nombre de ligne
+                            # * [ ] Délimiter avec '< !-- ZYXCBA -->' plutôt que le numéro ligne
 
                         # Ignorer les lignes de code/exemples qui ne sont pas de vrais TODOs
                         line_lower = line.lower().strip()
@@ -358,32 +356,27 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
     lines.append("???+ notice")
     lines.append("")
     lines.append(
-        "    Même dans cette page, le contenu de ce cadre, vous pouvez le modifier avec le bouton en haut, à droite, et ainsi ajouter / modifier / supprimer à volonté, ce disclaimer... Comme toutes les pages du site, elle évolue selon vos actions et/ou réactions."
+        "    Cette page est générée automatiquement par le script `resources/auto/gen_todos.py` à chaque push sur `main`. Donc, ne pas ma modifier par simple édition..."
     )
     lines.append("")
     lines.append(
-        "    Et si le :heart: vous en dit, vous pouvez même tâcher d'en réaliser l'une d'elles (Voir liste ci-dessous) !"
+        "    Et si le :heart: vous en dit, vous pouvez tâcher de réaliser un des todos ci-dessous !"
     )
     lines.append("    ")
-    lines.append("    N'oubliez-pas ! :")
+    lines.append("    Enfin, n'oubliez-pas ! :")
     lines.append("    ")
     lines.append(
         "    - Pour toutes questions ou suggestions, merci de créer une [issue sur GitHub](https://github.com/PyMoX-fr/PyMoX-fr.github.io/issues) :smiley:"
     )
     lines.append(
-        "    - Si vous avez une question, n'hésitez pas à nous contacter selon l'heure peut-être alors en LIVE, via [le canal Discord des passionnés de Python francophones, PyPRO !](https://discord.com/channels/1056923339546968127/1075041467690664070) :wink:"
+        "    - Si vous avez une question, n'hésitez pas à nous contacter selon l'heure peut-être alors en LIVE, via [le canal Discord des passionnés de Python francophones, PyPRO !](https://discord.com/channels/1056923339546968127/1075041467690664070) ![logo](https:pymox.fr/assets/images/pypro.png)"
     )
-    lines.append("")
-    lines.append("    ---")
-    lines.append("")
     lines.append(
-        "    *Fin de la partie statique de cette page, ne changez rien ci-dessous, car tout ce qui suit sera re-généré et écrasé automatiquement dès modification d'un todo dans n'importe quel fichier du projet*."
+        "    ---"
     )
-    lines.append("<!-- ZYXCBA -->")
-    
-    lines.append("## To do")
-    lines.append("")
-    lines.append(f"<!-- {date_rapport_txt} -->")
+    lines.append(
+        "    Comme toutes les pages du site, celle-ci évolue selon vos actions et/ou réactions :wink:"
+    )
     lines.append("")
 
     # Calculer le nombre de TODOs sans le TODO statique pour l'affichage
@@ -397,11 +390,12 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
             display_counts[todo["tag"]] -= 1
             break
 
+    lines.append(f"<!-- {date_rapport_txt} -->")
     if not todos:
         lines.append("✅ **Aucun TODO trouvé dans le projet !**")
         lines.append("")
     else:
-        lines.append(f"📌 **{display_count} TODOs trouvés dans le projet :**")
+        lines.append(f"## 📌 **{display_count} TODOs trouvés dans le projet :**")
         lines.append("")
 
         # Afficher chaque tag avec ses occurrences dans l'ordre de priorité
@@ -418,9 +412,7 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
                 else:
                     emoji = "💤"  # FAIBLE
 
-                lines.append(
-                    f"### {emoji} {tag} ({len(tag_todos)})"
-                )
+                lines.append(f"### {emoji} {tag} ({len(tag_todos)})")
                 lines.append("")
 
                 for todo in tag_todos:
@@ -455,25 +447,6 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
         lines.append(f"| **TOTAL** | **{sum(display_counts.values())}** |")
         lines.append("")
 
-    lines.append("---")
-    lines.append("")
-    lines.append("## Done (Du + récent au + ancien)")
-    lines.append("")
-    lines.append(
-        "* Accepter autres mots pour semantic-release: up, chore, docs, etc..."
-    )
-    lines.append(
-        "* Un seul script pour der déploy (Actuellement duplication dans le workflow des push / main et celui du CRON quotidien... :-(...)"
-    )
-    lines.append(
-        "* Ajout d'une page qui liste automatiquement tous les changements, validés par un push sur la branche main, et calcule en conséquence le numéro de version ([CHANGELOG](CHANGELOG.md)) du projet."
-    )
-    lines.append(
-        "* Ajout d'un fichier .gitignore pour éviter que les fichiers temporaires ne soient ajoutés au dépôt."
-    )
-    lines.append(
-        "* Ajout d'un fichier README.md (Pour le dépôt) pour expliquer comment utiliser ce projet."
-    )
     lines.append("")
 
     # Écrire le fichier
@@ -525,7 +498,7 @@ Exemples d'utilisation:
 
     # Chemin vers les settings VSCode (optionnel)
     settings_path = (
-        args.settings or r"C:\Users\utilisateur\AppData\Roaming\Code\User\settings.json"
+        args.settings or r"C:\\Users\\utilisateur\\AppData\\Roaming\\Code\\User\\settings.json"
     )
 
     if not args.summary_only:
@@ -572,7 +545,6 @@ Exemples d'utilisation:
             print("✅ Aucun TODO trouvé")
     else:
         print_results(todos, counts)
-
 
 if __name__ == "__main__":
     main()

@@ -15,7 +15,7 @@ from scan_todos import find_todos, generate_markdown_report
 
 def main():
     """Génère le fichier todo.md pour les workflows."""
-    print("🔍 Génération du rapport TODO pour le workflow...")
+    print("\n🔍 Génération du rapport TODO pour le workflow...")
 
     # Scanner les todos dans le répertoire racine du projet
     root_dir = os.path.join(os.path.dirname(__file__), "../..")

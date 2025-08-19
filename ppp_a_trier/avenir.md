@@ -21,9 +21,9 @@ tags:
 * [x] Réservation Nom de Domaine **PyMoX.fr**
 * [x] Mise en place des dépôts GitHub de **PyMoX**
 * [x] Mise en place du canal Discord de **PyMoX**
-* [ ] Mise en place de l'App de **PyMoX** - v 0.0.1
-* [ ] Mise en place du site web [**PyMoX.fr**](http://www.PyMoX.fr)- v 0.0.1
-* [ ] Mettre en place ce genre de test
+* Mise en place de l'App de **PyMoX** - v 0.0.1
+* Mise en place du site web [**PyMoX.fr**](http://www.PyMoX.fr)- v 0.0.1
+* Mettre en place ce genre de test vie IDE
 <!-- IDE('exemple/exo', EXPORT=1) -->
 {{ IDE('chapitre_plusieurs_pages/exemple/exo') }}
 

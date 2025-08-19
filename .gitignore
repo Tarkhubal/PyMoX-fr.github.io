@@ -37,3 +37,4 @@ _build/
 
 # Généré par les workflows (push, dayly, hebdo)
 /docs/outils/logs/deploy_info.md 
+/docs/outils/logs/todo.md 
