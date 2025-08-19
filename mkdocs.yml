@@ -199,7 +199,7 @@ plugins:
       # - sqlite-console
       # module_name: macros_pymox/one_citation_a_day
       module_name:
-        ppp_macros_pymox # ppp_ = dossier provisoire en attendant de réussir à glisser ces macros dans includes/macros_pymox/
+        macros # Macros organisées dans le dossier macros/
         # - macros_pymox/one_citation_a_day
         # - macros_pymox.all_citations
       # modules:

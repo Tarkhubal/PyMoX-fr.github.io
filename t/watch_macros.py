@@ -19,7 +19,7 @@ class FileChangeHandler(FileSystemEventHandler):
 
 handler = FileChangeHandler()
 observer = Observer()
-observer.schedule(handler, path="./ppp_macros_pymox", recursive=False)
+observer.schedule(handler, path="./macros", recursive=False)
 # observer.schedule(handler, path="./", recursive=True)
 observer.start()
 

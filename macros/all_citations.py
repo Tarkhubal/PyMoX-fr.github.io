@@ -5,12 +5,11 @@ from datetime import datetime
 def define_env(env):
     @env.macro
     def all_citations():
-        with open("macros_pymox/citations.json", encoding="utf-8") as f:
+        with open("macros/citations.json", encoding="utf-8") as f:
             data = json.load(f)
         citations = data["citations"]
 
-
-        str=''
+        str = ""
         for i in range(len(citations)):
 
             citation_obj = citations[i]
