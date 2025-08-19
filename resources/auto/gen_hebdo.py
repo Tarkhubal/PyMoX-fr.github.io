@@ -297,7 +297,7 @@ def generate_markdown_report(path="docs/outils/logs/hebdo.md"):
         os.makedirs(os.path.dirname(path), exist_ok=True)
 
         with open(path, "w", encoding="utf-8") as f:
-            f.write(f"# 📝 Rapport Hebdo - {date_rapport_txt}\n")
+            f.write(f"# 📝 Rapport Hebdo\n")
             f.write(
                 """
 <!--
