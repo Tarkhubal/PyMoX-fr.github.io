@@ -97,7 +97,7 @@ PRIORITY_ORDER = [
 
 # 2fix use TAG List pour définir l'ordre de priorité des TAGs
 
-# [ ] Permettre tri de chaque tâche par drag & drop 
+# [ ] Permettre tri de chaque tâche par drag & drop
 
 
 def load_excludes(settings_path):
@@ -276,7 +276,7 @@ def print_results(todos, counts):
         return
 
     print(f"📌 {len(todos)} TODOs trouvés dans le projet\n")
-
+    
     # Grouper par tag pour un affichage organisé
     todos_by_tag = defaultdict(list)
     for todo in todos:
@@ -336,7 +336,7 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
     paris_tz = pytz.timezone("Europe/Paris")
     now_local = datetime.now(paris_tz)
     date_rapport_txt = (
-        f"Dernier rapport généré le {now_local.strftime('%d/%m/%Y à %H:%M')}"
+        f"Liste générée le {now_local.strftime('%d/%m/%Y à %H:%M')}"
     )
 
     # Créer le répertoire de destination s'il n'existe pas
@@ -399,21 +399,24 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
         lines.append(f"## 📌 **{display_count} TODOs trouvés dans le projet :**")
         lines.append("")
 
-        # Afficher chaque tag avec ses occurrences dans l'ordre de priorité
         for tag in PRIORITY_ORDER:
             if tag in todos_by_tag:
                 tag_todos = todos_by_tag[tag]
                 # Emoji selon la priorité
                 if tag in ["2fix", "2ar"]:
                     emoji = "🚨"  # URGENT
+                    color= 'danger'
                 elif tag in ["2dbug", "* [/]"]:
                     emoji = "⚠️"  # IMPORTANT
-                elif tag in ["* [ ]", "2do", "2see"]:
+                    color= 'warning'
+                elif tag in ["* [ ]", "2do"]:
                     emoji = "📋"  # MOYEN
+                    color= 'abstract'
                 else:
                     emoji = "💤"  # FAIBLE
+                    color= 'info'
 
-                lines.append(f"### {emoji} {tag} ({len(tag_todos)})")
+                lines.append(f'???+ {color} "{tag} ({len(tag_todos)}) {emoji}"')
                 lines.append("")
 
                 for todo in tag_todos:
@@ -429,9 +432,9 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
                     line_num = todo["line"]
 
                     if tag_text:
-                        lines.append(f"- **{file_path}:{line_num}** → {tag_text}")
+                        lines.append(f"    - **{file_path}:{line_num}** → {tag_text}")
                     else:
-                        lines.append(f"- **{file_path}:{line_num}** → {todo['text']}")
+                        lines.append(f"    - **{file_path}:{line_num}** → {todo['text']}")
                 lines.append("")
 
         # Tableau résumé
@@ -446,6 +449,11 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
                 lines.append(f"| `{tag}` | {count} |")
 
         lines.append(f"| **TOTAL** | **{sum(display_counts.values())}** |")
+        lines.append("")
+        lines.append(
+                f"<div style='text-align: right; color: gray; font-size: 16px; line-height: 0;'>📋 <span style='font-style: italic;'>{date_rapport_txt}</span>.</div>\n"
+            )
+
         lines.append("")
 
     lines.append("")
