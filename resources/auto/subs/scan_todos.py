@@ -357,7 +357,7 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
     lines.append("???+ notice")
     lines.append("")
     lines.append(
-        "    Cette page est générée automatiquement par le script `resources/auto/gen_todos.py` à chaque push sur `main`. Donc, ne pas ma modifier par simple édition..."
+        "    Cette page est générée automatiquement par le script `resources/auto/gen_todos.py` à chaque push sur `main`. Donc, ne pas la modifier par simple édition..."
     )
     lines.append("")
     lines.append(

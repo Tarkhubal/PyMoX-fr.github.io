@@ -1,4 +1,4 @@
-# 📝 Rapport Hebdo - Dernier rapport généré le 19/08/2025 à 08:00
+# 📝 Rapport Hebdo
 
 <!--
     ####################################################################################################################
@@ -34,4 +34,4 @@
 !!! success "Fin du script `gen_hebdo.py` ✅ → Tout est globalement OK 👌 !"        
     Juste quelques détails à surveiller...
 
-<div style='text-align: right; color: gray; font-size: 16px; line-height: 0;'>📋 <span style='font-style: italic;'>Dernier rapport généré le 19/08/2025 à 08:00</span>.</div>
+<div style='text-align: right; color: gray; font-size: 16px; line-height: 0;'>📋 <span style='font-style: italic;'>Dernier rapport généré le 19/08/2025 à 09:03</span>.</div>

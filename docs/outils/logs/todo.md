@@ -5,7 +5,7 @@ author: GC7
 
 ???+ notice
 
-    Cette page est générée automatiquement par le script `resources/auto/gen_todos.py` à chaque push sur `main`. Donc, ne pas ma modifier par simple édition...
+    Cette page est générée automatiquement par le script `resources/auto/gen_todos.py` à chaque push sur `main`. Donc, ne pas la modifier par simple édition...
 
     Et si le :heart: vous en dit, vous pouvez tâcher de réaliser un des todos ci-dessous !
     
@@ -16,7 +16,7 @@ author: GC7
     ---
     Comme toutes les pages du site, celle-ci évolue selon vos actions et/ou réactions :wink:
 
-<!-- Dernier rapport généré le 19/08/2025 à 08:53 -->
+<!-- Dernier rapport généré le 19/08/2025 à 08:57 -->
 ## 📌 **16 TODOs trouvés dans le projet :**
 
 ### 🚨 2fix (2)
