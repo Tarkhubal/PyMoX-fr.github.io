@@ -16,7 +16,7 @@ author: GC7
 
 ## To do
 
-<!-- Dernier rapport généré le 18/08/2025 à 21:37 -->
+<!-- Dernier rapport généré le 19/08/2025 à 05:59 -->
 
 📌 **25 TODOs trouvés dans le projet :**
 
@@ -67,8 +67,11 @@ author: GC7
 
 ## Done (Du + récent au + ancien)
 
-* Accepter autres mots pour semantic-release: up, chore, docs, etc...
-* Un seul script pour der déploy (Actuellement duplication dans le workflow des push / main et celui du CRON quotidien... :-(...)
-* Ajout d'une page qui liste automatiquement tous les changements, validés par un push sur la branche main, et calcule en conséquence le numéro de version ([CHANGELOG](CHANGELOG.md)) du projet.
-* Ajout d'un fichier .gitignore pour éviter que les fichiers temporaires ne soient ajoutés au dépôt.
-* Ajout d'un fichier README.md (Pour le dépôt) pour expliquer comment utiliser ce projet.
+- 2do No edit page btn on dynamic pages (reports as togo.md)
+- 2do sorting by drag and drop
+
+- Accepter autres mots pour semantic-release: up, chore, docs, etc...
+- Un seul script pour der déploy (Actuellement duplication dans le workflow des push / main et celui du CRON quotidien... :smiley:...)
+- Ajout d'une page qui liste automatiquement tous les changements, validés par un push sur la branche main, et calcule en conséquence le numéro de version ([CHANGELOG](CHANGELOG.md)) du projet.
+- Ajout d'un fichier .gitignore pour éviter que les fichiers temporaires ne soient ajoutés au dépôt.
+- Ajout d'un fichier README.md (Pour le dépôt) pour expliquer comment utiliser ce projet.
