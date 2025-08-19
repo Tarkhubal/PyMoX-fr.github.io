@@ -38,3 +38,6 @@ _build/
 # Généré par les workflows (push, dayly, hebdo)
 /docs/outils/logs/deploy_info.md 
 /docs/outils/logs/todo.md 
+
+# Pour faire oublier un fichier déjà commité
+# git rm --cached docs/outils/logs/todo.md
