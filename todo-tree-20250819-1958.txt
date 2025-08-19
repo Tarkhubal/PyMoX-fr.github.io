@@ -1,0 +1,44 @@
+└─ GH
+   ├─ 2dbug
+   │  └─ resources
+   │     └─ scan_todos.py
+   │        └─ line 98: use TAG List pour définir l'ordre de priorité des TAGs
+   ├─ 2see
+   │  └─ mkdocs.yml
+   │     └─ line 198: à tester git-revision-date-localized
+   └─ * [ ]
+      ├─ docs
+      │  ├─ outils
+      │  │  ├─ benchmarks
+      │  │  │  ├─ cpp.md
+      │  │  │  │  └─ line 13: Benchmark C++
+      │  │  │  └─ mojo.md
+      │  │  │     └─ line 13: Benchmark Mojo
+      │  │  ├─ logs
+      │  │  │  └─ last_commits.md
+      │  │  │     └─ line 17: Coder API // 10 der commits
+      │  │  └─ technos
+      │  │     ├─ backend
+      │  │     │  ├─ daily.md
+      │  │     │  │  └─ line 4: Icone + Explications du rôle de ce workflow
+      │  │     │  ├─ hebdo.md
+      │  │     │  │  └─ line 4: Icone + Explications du rôle de ce workflow
+      │  │     │  └─ push.md
+      │  │     │     └─ line 4: Explications du rôle de ce workflow
+      │  │     └─ languages
+      │  │        ├─ fletx.md
+      │  │        │  └─ line 4: Icone + Doc Flet/FletX
+      │  │        ├─ mojo.md
+      │  │        │  └─ line 4: Icone + Doc Mojo
+      │  │        ├─ php.md
+      │  │        │  └─ line 4: Icone + Doc PHP
+      │  │        ├─ python.md
+      │  │        │  └─ line 4: Icone + Doc Py
+      │  │        └─ sql.md
+      │  │           └─ line 4: Icone + Doc SQL
+      │  └─ index.md
+      │     └─ line 75: Ici page pour aller + loin: git, vsc/todos etc...
+      └─ resources
+         └─ scan_todos.py
+            ├─ line 100: Permettre tri de chaque tâche par drag & drop
+            └─ line 183: Délimiter avec '< !-- ZYXCBA -->' plutôt que le numéro ligne

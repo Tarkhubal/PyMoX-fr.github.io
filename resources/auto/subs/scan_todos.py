@@ -69,36 +69,85 @@ DEFAULT_EXCLUDES = [
     "docs/outils/logs/todo.md",
 ]
 
-# Tags selon votre liste exacte avec regex plus flexibles
-TAGS = {
-    "2fix": r"(?:^|[^a-zA-Z0-9])2fix\b(.*)$",  # à solutionner
-    "2dbug": r"(?:^|[^a-zA-Z0-9])2dbug\b(.*)$",  # oki2
-    "2ar": r"(?:^|[^a-zA-Z0-9])2ar\b(.*)$",  # à enlever
-    "* [/]": r".*\*\s*\[/\]\s*(.*)$",  # en cours (plus flexible)
-    "* [ ]": r".*\*\s*\[\s*\]\s*(.*)$",  # à faire (plus flexible)
-    "2do": r"(?:^|[^a-zA-Z0-9])2do\b(.*)$",  # à faire
-    "2see": r"(?:^|[^a-zA-Z0-9])2see\b(.*)$",  # à voir
-    "2let": r"(?:^|[^a-zA-Z0-9])2let\b(.*)$",  # à laisser
-}
-
-TAG_REGEXES = {k: re.compile(v, re.IGNORECASE | re.MULTILINE) for k, v in TAGS.items()}
-
-# Ordre de priorité pour l'affichage (du plus urgent au moins urgent)
-PRIORITY_ORDER = [
-    "2fix",  # URGENT - à solutionner (bugs)
-    "2dbug",  # URGENT - oki2 (à vérifier)
-    "2ar",  # IMPORTANT - à enlever (nettoyage)
-    "* [/]",  # IMPORTANT - en cours (travail actuel)
-    "* [ ]",  # MOYEN - à faire (tâches planifiées)
-    "2do",  # MOYEN - à faire (tâches générales)
-    "2see",  # MOYEN - à voir (à examiner)
-    "2let",  # FAIBLE - à laisser (peut attendre)
+# Configuration des tags TODO avec priorité, regex, couleur et description
+TODO_TAGS = [
+    # Ordre de priorité (du plus urgent au moins urgent)
+    {
+        "tag": "2fix",
+        "regex": r"(?:^|[^a-zA-Z0-9])2fix\b(.*)$",
+        "priority": "URGENT",
+        "color": "danger",
+        "emoji": "🚨",
+        "description": "à solutionner (bugs)",
+    },
+    {
+        "tag": "2dbug",
+        "regex": r"(?:^|[^a-zA-Z0-9])2dbug\b(.*)$",
+        "priority": "URGENT",
+        "color": "warning",
+        "emoji": "⚠️",
+        "description": "oki2 (à vérifier)",
+    },
+    {
+        "tag": "2ar",
+        "regex": r"(?:^|[^a-zA-Z0-9])2ar\b(.*)$",
+        "priority": "IMPORTANT",
+        "color": "danger",
+        "emoji": "🚨",
+        "description": "à enlever (nettoyage)",
+    },
+    {
+        "tag": "* [/]",
+        "regex": r".*\*\s*\[/\]\s*(.*)$",
+        "priority": "IMPORTANT",
+        "color": "warning",
+        "emoji": "⚠️",
+        "description": "en cours (travail actuel)",
+    },
+    {
+        "tag": "* [ ]",
+        "regex": r".*\*\s*\[\s*\]\s*(.*)$",
+        "priority": "MOYEN",
+        "color": "abstract",
+        "emoji": "📋",
+        "description": "à faire (tâches planifiées)",
+    },
+    {
+        "tag": "2do",
+        "regex": r"(?:^|[^a-zA-Z0-9])2do\b(.*)$",
+        "priority": "MOYEN",
+        "color": "abstract",
+        "emoji": "📋",
+        "description": "à faire (tâches générales)",
+    },
+    {
+        "tag": "2see",
+        "regex": r"(?:^|[^a-zA-Z0-9])2see\b(.*)$",
+        "priority": "FAIBLE",
+        "color": "info",
+        "emoji": "💤",
+        "description": "à voir (à examiner)",
+    },
+    {
+        "tag": "2let",
+        "regex": r"(?:^|[^a-zA-Z0-9])2let\b(.*)$",
+        "priority": "FAIBLE",
+        "color": "info",
+        "emoji": "💤",
+        "description": "à laisser (peut attendre)",
+    },
 ]
 
-# 2dbug use TAG List pour définir l'ordre de priorité des TAGs
+# Compilation des regex pour optimiser les performances
+TAG_REGEXES = {
+    item["tag"]: re.compile(item["regex"], re.IGNORECASE | re.MULTILINE)
+    for item in TODO_TAGS
+}
+
+# Ordre de priorité pour l'affichage (extrait automatiquement de TODO_TAGS)
+PRIORITY_ORDER = [item["tag"] for item in TODO_TAGS]
 
 # * [ ] Permettre tri de chaque tâche par drag & drop
-
 
 def load_excludes(settings_path):
     """Récupère la liste des excludeGlobs sans parser tout le settings.json."""
@@ -196,6 +245,13 @@ def find_todos(root=".", settings_path=None, include_static_todo_md=False):
                                 "r'.*",  # Regex dans le code (plus spécifique)
                                 "tags recherchés",
                                 "afficher seulement",
+                                # Ignorer les définitions de notre structure TODO_TAGS
+                                '"tag":',  # Définitions dans TODO_TAGS
+                                '"regex":',  # Définitions dans TODO_TAGS
+                                '"priority":',  # Définitions dans TODO_TAGS
+                                '"color":',  # Définitions dans TODO_TAGS
+                                '"emoji":',  # Définitions dans TODO_TAGS
+                                '"description":',  # Définitions dans TODO_TAGS
                                 # Ignorer les définitions de regex et commentaires dans le code
                                 "# à solutionner",
                                 "# oki2",
@@ -398,21 +454,24 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
         for tag in PRIORITY_ORDER:
             if tag in todos_by_tag:
                 tag_todos = todos_by_tag[tag]
-                # Emoji selon la priorité
-                if tag in ["2fix", "2ar"]:
-                    emoji = "🚨"  # URGENT
-                    color = "danger"
-                elif tag in ["2dbug", "* [/]"]:
-                    emoji = "⚠️"  # IMPORTANT
-                    color = "warning"
-                elif tag in ["* [ ]", "2do"]:
-                    emoji = "📋"  # MOYEN
-                    color = "abstract"
+                # Récupérer les informations du tag depuis TODO_TAGS
+                tag_info = next(
+                    (item for item in TODO_TAGS if item["tag"] == tag), None
+                )
+                if tag_info:
+                    # Utiliser directement les valeurs définies dans TODO_TAGS
+                    emoji = tag_info["emoji"]
+                    color = tag_info["color"]
+                    description = tag_info["description"]
                 else:
-                    emoji = "💤"  # FAIBLE
-                    color = "info"
+                    # Fallback pour les tags non définis
+                    emoji = "❓"
+                    color = "note"
+                    description = "tag non défini"
 
-                lines.append(f'???+ {color} "{tag} ({len(tag_todos)}) {emoji}"')
+                lines.append(
+                    f'???+ {color} "{tag} ({len(tag_todos)}) {emoji} - {description}"'
+                )
                 lines.append("")
 
                 for todo in tag_todos:
@@ -512,7 +571,7 @@ Exemples d'utilisation:
     if not args.summary_only:
         print("🔍 Scan des TODOs dans le projet...")
         print(f"📂 Répertoire: {os.path.abspath(args.dir)}")
-        print(f"🏷️  Tags recherchés: {', '.join(TAGS.keys())}")
+        print(f"🏷️  Tags recherchés: {', '.join(item['tag'] for item in TODO_TAGS)}")
         if args.tag:
             print(f"🎯 Filtrage par tag: {args.tag}")
         if args.debug:
