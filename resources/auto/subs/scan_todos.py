@@ -275,7 +275,7 @@ def print_results(todos, counts):
         print("✅ Aucun TODO trouvé dans le projet")
         return
 
-    print(f"📌 {len(todos)} TODOs trouvés dans le projet :\n")
+    print(f"📌 {len(todos)} TODOs trouvés dans le projet\n")
 
     # Grouper par tag pour un affichage organisé
     todos_by_tag = defaultdict(list)
