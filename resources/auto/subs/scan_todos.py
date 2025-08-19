@@ -77,10 +77,10 @@ TAGS = {
     "2fix": r"(?:^|[^a-zA-Z0-9])2fix\b(.*)$",  # à solutionner
     "2dbug": r"(?:^|[^a-zA-Z0-9])2dbug\b(.*)$",  # oki2
     "2ar": r"(?:^|[^a-zA-Z0-9])2ar\b(.*)$",  # à enlever
-    "2see": r"(?:^|[^a-zA-Z0-9])2see\b(.*)$",  # à voir
     "* [/]": r".*\*\s*\[/\]\s*(.*)$",  # en cours (plus flexible)
     "* [ ]": r".*\*\s*\[\s*\]\s*(.*)$",  # à faire (plus flexible)
     "2do": r"(?:^|[^a-zA-Z0-9])2do\b(.*)$",  # à faire
+    "2see": r"(?:^|[^a-zA-Z0-9])2see\b(.*)$",  # à voir
     "2let": r"(?:^|[^a-zA-Z0-9])2let\b(.*)$",  # à laisser
 }
 
@@ -89,14 +89,16 @@ TAG_REGEXES = {k: re.compile(v, re.IGNORECASE | re.MULTILINE) for k, v in TAGS.i
 # Ordre de priorité pour l'affichage (du plus urgent au moins urgent)
 PRIORITY_ORDER = [
     "2fix",  # URGENT - à solutionner (bugs)
-    "2ar",  # URGENT - à enlever (nettoyage)
-    "2dbug",  # IMPORTANT - oki2 (à vérifier)
+    "2dbug",  # URGENT - oki2 (à vérifier)
+    "2ar",  # IMPORTANT - à enlever (nettoyage)
     "* [/]",  # IMPORTANT - en cours (travail actuel)
     "* [ ]",  # MOYEN - à faire (tâches planifiées)
     "2do",  # MOYEN - à faire (tâches générales)
     "2see",  # MOYEN - à voir (à examiner)
     "2let",  # FAIBLE - à laisser (peut attendre)
 ]
+
+# 2fix use TAG List pour définir l'ordre de priorité des TAGs
 
 
 def load_excludes(settings_path):
@@ -176,8 +178,10 @@ def find_todos(root=".", settings_path=None, include_static_todo_md=False):
                             and rel_file == "docs/outils/logs/todo.md"
                         ):
                             # Ne scanner que les lignes 1-20 (partie statique)
-                            if i > 20:
+                            if i > 21:
                                 break
+
+                            # * [ ] Délimiter avec '<!-- ZYXCBA -->' plutôt que le nombre de ligne
 
                         # Ignorer les lignes de code/exemples qui ne sont pas de vrais TODOs
                         line_lower = line.lower().strip()
@@ -193,8 +197,6 @@ def find_todos(root=".", settings_path=None, include_static_todo_md=False):
                                 "r'.*",  # Regex dans le code (plus spécifique)
                                 "tags recherchés",
                                 "afficher seulement",
-                                ": 4 ,",  # Ligne de comptage dans txt.md
-                                "1 dbug, 1 2ar",  # Ligne de comptage
                                 # Ignorer les définitions de regex et commentaires dans le code
                                 "# à solutionner",
                                 "# oki2",
@@ -356,14 +358,14 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
     lines.append("???+ notice")
     lines.append("")
     lines.append(
-        "    Même cette page, vous pouvez la modifier avec le bouton en haut, à droite, et ainsi ajouter / modifier / supprimer à volonté, des tâches à faire... Comme toutes les pages du site, elle évolue selon vos actions et/ou réactions."
+        "    Même dans cette page, le contenu de ce cadre, vous pouvez le modifier avec le bouton en haut, à droite, et ainsi ajouter / modifier / supprimer à volonté, ce disclaimer... Comme toutes les pages du site, elle évolue selon vos actions et/ou réactions."
     )
     lines.append("")
     lines.append(
         "    Et si le :heart: vous en dit, vous pouvez même tâcher d'en réaliser l'une d'elles (Voir liste ci-dessous) !"
     )
     lines.append("    ")
-    lines.append("    N'oubliez-pas !:")
+    lines.append("    N'oubliez-pas ! :")
     lines.append("    ")
     lines.append(
         "    - Pour toutes questions ou suggestions, merci de créer une [issue sur GitHub](https://github.com/PyMoX-fr/PyMoX-fr.github.io/issues) :smiley:"
@@ -372,6 +374,13 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
         "    - Si vous avez une question, n'hésitez pas à nous contacter selon l'heure peut-être alors en LIVE, via [le canal Discord des passionnés de Python francophones, PyPRO !](https://discord.com/channels/1056923339546968127/1075041467690664070) :wink:"
     )
     lines.append("")
+    lines.append("    ---")
+    lines.append("")
+    lines.append(
+        "    *Fin de la partie statique de cette page, ne changez rien ci-dessous, car tout ce qui suit sera re-généré et écrasé automatiquement dès modification d'un todo dans n'importe quel fichier du projet*."
+    )
+    lines.append("<!-- ZYXCBA -->")
+    
     lines.append("## To do")
     lines.append("")
     lines.append(f"<!-- {date_rapport_txt} -->")
@@ -410,7 +419,7 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
                     emoji = "💤"  # FAIBLE
 
                 lines.append(
-                    f"### {emoji} {tag} ({len(tag_todos)} occurrence{'s' if len(tag_todos) > 1 else ''})"
+                    f"### {emoji} {tag} ({len(tag_todos)})"
                 )
                 lines.append("")
 

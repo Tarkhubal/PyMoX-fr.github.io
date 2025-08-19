@@ -23,6 +23,11 @@ FILES_TO_WATCH = {
     #     "run",
     #     "resources/generate_changelog.py",
     # ],
+    os.path.abspath("resources/auto/subs/scan_todos.py"): [
+        "flet",
+        "run",
+        "resources/auto/gen_todos.py",
+    ],
     os.path.abspath(script_path): [
         "flet",
         "run",
