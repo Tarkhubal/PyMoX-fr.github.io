@@ -184,6 +184,10 @@ plugins:
   # - tags:
   #     tags_file: tags.md # Déprécié
   - tags
+  - git-revision-date-localized:
+      type: date
+      locale: fr
+      fallback_to_build_date: true
 
   # - mkdocs-material
   # - mkdocs-pymdownx
@@ -195,7 +199,6 @@ plugins:
         # python_libs:
         #   - turtle
         tab_to_spaces: 4
-        # - git-revision-date-localized # 2see à tester git-revision-date-localized
       # - sqlite-console
       # module_name: macros_pymox/one_citation_a_day
       module_name:
