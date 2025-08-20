@@ -418,7 +418,7 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
     )
     lines.append("")
     lines.append(
-        "    Et si le :heart: vous en dit, vous pouvez tâcher de réaliser un des todos ci-dessous !"
+        "    Et si le :heart: vous en dit, vous pouvez tâcher de réaliser un des todos ci-dessous, voir d'en ajouter... !"
     )
     lines.append("    ")
     lines.append("    Enfin, n'oubliez-pas ! :")
