@@ -81,7 +81,7 @@ def get_block_prefix_by_index(i: int, has_unreleased: bool) -> str:
 def format_changelog(tag_commits: dict[str, list[str]]) -> str:
     lines = [
         "---",
-        "title: 🆕 CHANGELOG Local",
+        "title: 🆕 CHANGELOG",
         "hide_edit_button: true",
         "---",
         "",
