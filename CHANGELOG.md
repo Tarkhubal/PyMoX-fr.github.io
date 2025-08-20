@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.0.3 (2025-08-20)
+
+### Up
+
+- New style for todos
+  ([`b2dc4d3`](https://github.com/PyMoX-fr/PyMoX-fr.github.io/commit/b2dc4d3472057277a4c9cd0f6266d1f33f0b9a3a))
+
+
 ## v1.0.2 (2025-08-19)
 
 ### Up
