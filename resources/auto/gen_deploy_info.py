@@ -100,7 +100,22 @@ selected_mode = mode_info[args.mode]
 
 # Écriture du fichier
 with open(DEPLOY_INFO_PATH, "w", encoding="utf-8") as f:
-    f.write("# 🚀 Dernier déploiement\n\n")
+    f.write("---\n")
+    f.write("title: ⏱️ Dernier déploiement\n")
+    f.write("hide_edit_button: true\n")
+    f.write("---\n\n")
+    f.write("<!--\n")
+    f.write(
+        "    ####################################################################################################################\n\n"
+    )
+    f.write(
+        "    ATTENTION: Ne pas modifier ce fichier, car il est généré automatiquement par `resources/auto/gen_deploy_info.py` chaque push sur la branche main\n"
+    )
+    f.write("    \n")
+    f.write(
+        "    ####################################################################################################################\n"
+    )
+    f.write("-->\n\n")
     f.write(f"{selected_mode['title']}\n\n")
     f.write(
         "| 📅 Date        | 🕰️ Heure (Paris)       | 🌐 ISO 8601 UTC         | 🔢 Timestamp UNIX |\n"

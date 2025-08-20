@@ -297,14 +297,16 @@ def generate_markdown_report(path="docs/outils/logs/hebdo.md"):
         os.makedirs(os.path.dirname(path), exist_ok=True)
 
         with open(path, "w", encoding="utf-8") as f:
-            f.write(f"# 📝 Rapport Hebdo\n")
+            f.write("---\n")
+            f.write("title: 📝 Rapport Hebdo\n")
+            f.write("hide_edit_button: true\n")
+            f.write("---\n\n")
             f.write(
-                """
-<!--
+                """<!--
     ####################################################################################################################
 
-    ATTENTION: Ne pas modifier ce fichier, car il est généré automatiquement par `resources/auto/gen_hebdo.py` chaque semaine 
-    
+    ATTENTION: Ne pas modifier ce fichier, car il est généré automatiquement par `resources/auto/gen_hebdo.py` chaque semaine
+
     ####################################################################################################################
 -->
 

@@ -55,8 +55,9 @@ def group_commits_by_tag(commits: list[str]) -> dict[str, list[str]]:
 
     return tag_commits
 
+
 def generate_base_labels() -> list[str]:
-    distribution = [("success", 1), ("info", 8), ("note",999)]
+    distribution = [("success", 1), ("info", 8), ("note", 999)]
     return [label for label, count in distribution for _ in range(count)]
 
 
@@ -78,7 +79,21 @@ def get_block_prefix_by_index(i: int, has_unreleased: bool) -> str:
 
 
 def format_changelog(tag_commits: dict[str, list[str]]) -> str:
-    lines = ["# 🆕 CHANGELOG</span>"]
+    lines = [
+        "---",
+        "title: 🆕 CHANGELOG Local",
+        "hide_edit_button: true",
+        "---",
+        "",
+        "<!--",
+        "    ####################################################################################################################",
+        "",
+        "    ATTENTION: Ne pas modifier ce fichier, car il est généré automatiquement par `resources/auto/gen_changelog.py` chaque push sur la branche main",
+        "    ",
+        "    ####################################################################################################################",
+        "-->",
+        "",
+    ]
 
     # lines.append('???+ warning "<span style="color:red">ATTENTION : **Page en travaux**</span> 🚧"\n    <div class="copy_target" data-copy>→ Réfection du style du bloc si des commits de type Unreleased existent</div>')
 

@@ -4,10 +4,11 @@
 {# Note: Quasi inutile car bouton d'origine est maintenant ouvert dans un nouvel
 onglet, grâce au plugin: - open-in-new-tab: add_icon: true → Gardé pour
 personnalisation du lmessage et modèle de surcharge du thème #} {% block content
-%}
+%} {# Afficher le bouton d'édition seulement si la page n'a pas
+hide_edit_button: true #} {% if not page.meta.hide_edit_button %}
 <a
   href="{{ page.edit_url }}"
-  title="Modifier cette page"
+  title="7Modifier cette page"
   class="md-content__button md-icon"
   target="_blank"
   rel="edit"
@@ -18,7 +19,7 @@ personnalisation du lmessage et modèle de surcharge du thème #} {% block conte
     ></path>
   </svg>
 </a>
-{{ super() }} {% endblock %} {% block footer %} {{ super() }}
+{% endif %} {{ super() }} {% endblock %} {% block footer %} {{ super() }}
 <script>
   fetch("/versions.json")
     .then((response) => {

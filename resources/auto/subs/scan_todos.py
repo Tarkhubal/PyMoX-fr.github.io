@@ -150,6 +150,7 @@ PRIORITY_ORDER = [item["tag"] for item in TODO_TAGS]
 
 # * [ ] Permettre tri de chaque tâche par drag & drop
 
+
 def load_excludes(settings_path):
     """Récupère la liste des excludeGlobs sans parser tout le settings.json."""
     try:
@@ -407,6 +408,7 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
     lines.append("---")
     lines.append("title: 📋 À faire (To Do list)")
     lines.append("author: GC7")
+    lines.append("hide_edit_button: true")
     lines.append("---")
     lines.append("")
     lines.append("???+ notice")
