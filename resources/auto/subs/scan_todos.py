@@ -66,6 +66,7 @@ DEFAULT_EXCLUDES = [
     # Exclure les fichiers de résultats TODO Tree et le fichier todo.md généré
     "todo-tree*.txt",
     "docs/outils/logs/CHANGELOG.md",
+    "docs/outils/logs/deploy_info.md",
     "docs/outils/logs/todo.md",
 ]
 

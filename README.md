@@ -97,3 +97,5 @@ Chaque dépôt est ouvert aux suggestions, améliorations et retours. N’hésit
 ## 📬 Contact
 
 📬 Pour toute question ou discussion, rejoignez-nous sur [Discord – PyMoX](https://discord.com/channels/1395436334507626566/1395436335103213571)
+
+# 2fix der deploy out of todo
