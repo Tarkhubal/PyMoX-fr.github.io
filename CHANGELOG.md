@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.0.4 (2025-08-20)
+
+### Ux
+
+- No edit button if not necessary
+  ([`84463c7`](https://github.com/PyMoX-fr/PyMoX-fr.github.io/commit/84463c7382d675cbb7d585a84efd1e2258d9ca9f))
+
+
 ## v1.0.3 (2025-08-20)
 
 ### Up
