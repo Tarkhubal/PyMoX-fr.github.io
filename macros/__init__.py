@@ -12,5 +12,6 @@ def define_env(env: PyodideMacrosPlugin):
 
     # Ou créer les macros directement ici (mais le package n'a alors plus d'intérêt...)
     # @env.macro
-    # def macroX(...):
-    #     ...
+    # def macroX(...) : ...
+
+    # 2dbug retrait icon/lien pour éditer la page dans pages dynamiques
