@@ -80,50 +80,50 @@ TODO_TAGS = [
     {
         "tag": "2fix",
         "regex": r"(?:^|[^a-zA-Z0-9])2fix\b(.*)$",
-        "priority": "URGENT",
-        "color": "danger",
+        "priority": "PRIORITAIRE",
+        "color": "bug",
         "emoji": "🚨",
-        "description": "à solutionner (bugs)",
+        "description": "À solutionner",
     },
     {
         "tag": "2dbug",
         "regex": r"(?:^|[^a-zA-Z0-9])2dbug\b(.*)$",
         "priority": "URGENT",
         "color": "warning",
-        "emoji": "⚠️",
-        "description": "oki2 (à vérifier)",
+        "emoji": "🚨",
+        "description": "À vérifier",
     },
     {
         "tag": "2ar",
         "regex": r"(?:^|[^a-zA-Z0-9])2ar\b(.*)$",
         "priority": "IMPORTANT",
-        "color": "danger",
-        "emoji": "🚨",
-        "description": "à enlever (nettoyage)",
+        "color": "unreleased-block",
+        "emoji": "⚠️",
+        "description": "À enlever",
     },
     {
         "tag": "* [/]",
         "regex": r".*\*\s*\[/\]\s*(.*)$",
-        "priority": "IMPORTANT",
-        "color": "warning",
+        "priority": "NORMAL",
+        "color": "info",
         "emoji": "⚠️",
-        "description": "en cours (travail actuel)",
+        "description": "En cours",
     },
     {
         "tag": "* [ ]",
         "regex": r".*\*\s*\[\s*\]\s*(.*)$",
         "priority": "MOYEN",
-        "color": "abstract",
+        "color": "info",
         "emoji": "📋",
-        "description": "à faire (tâches planifiées)",
+        "description": "à faire",
     },
     {
         "tag": "2do",
         "regex": r"(?:^|[^a-zA-Z0-9])2do\b(.*)$",
         "priority": "MOYEN",
-        "color": "abstract",
+        "color": "example",
         "emoji": "📋",
-        "description": "à faire (tâches générales)",
+        "description": "À faire + tard",
     },
     {
         "tag": "2see",
@@ -131,15 +131,15 @@ TODO_TAGS = [
         "priority": "FAIBLE",
         "color": "info",
         "emoji": "💤",
-        "description": "à voir (à examiner)",
+        "description": "À voir",
     },
     {
         "tag": "2let",
         "regex": r"(?:^|[^a-zA-Z0-9])2let\b(.*)$",
-        "priority": "FAIBLE",
-        "color": "info",
+        "priority": "NULLE",
+        "color": "question",
         "emoji": "💤",
-        "description": "à laisser (peut attendre)",
+        "description": "À laisser ?",
     },
 ]
 
@@ -348,9 +348,9 @@ def print_results(todos, counts):
         if tag in todos_by_tag:
             tag_todos = todos_by_tag[tag]
             # Emoji selon la priorité
-            if tag in ["2fix", "2ar"]:
+            if tag in ["2fix", "2dbug"]:
                 emoji = "🚨"  # URGENT
-            elif tag in ["2dbug", "* [/]"]:
+            elif tag in ["2ar", "* [/]"]:
                 emoji = "⚠️"  # IMPORTANT
             elif tag in ["* [ ]", "2do", "2see"]:
                 emoji = "📋"  # MOYEN
@@ -468,6 +468,7 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
                     emoji = tag_info["emoji"]
                     color = tag_info["color"]
                     description = tag_info["description"]
+                    priority = tag_info["priority"]
                 else:
                     # Fallback pour les tags non définis
                     emoji = "❓"
@@ -475,7 +476,7 @@ def generate_markdown_report(todos, counts, output_path="docs/outils/logs/todo.m
                     description = "tag non défini"
 
                 lines.append(
-                    f'???+ {color} "{tag} ({len(tag_todos)}) {emoji} - {description}"'
+                    f'???+ {color} "{tag} ({len(tag_todos)}) {emoji} - {description} ({priority})"'
                 )
                 lines.append("")
 
