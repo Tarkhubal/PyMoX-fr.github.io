@@ -10,7 +10,7 @@ packages = [
     "mkdocs-open-in-new-tab",
     "python-semantic-release",
     "ruamel.yaml",
-    "git-revision-date-localized",
+    "mkdocs-git-revision-date-localized-plugin",
     "build"
 ]
 
