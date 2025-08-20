@@ -141,3 +141,15 @@ hotfix: correction urgente du lien cassé en production
 3. Limitez la première ligne à 72 caractères
 4. Après la première ligne, ajoutez une ligne vide puis une description détaillée si nécessaire
 5. Utilisez des listes à puces dans la description si approprié
+
+## Les différents types de commits
+
+| Emoji | Sens                           | Usage suggéré                             |
+|-------|--------------------------------|-------------------------------------------|
+| 🕒    | Dernières modifications        | "Last commits" chronologiques             |
+| 📦    | Livraison de code              | Commit d’une feature ou d’un fix          |
+| 🧠    | Travail réfléchi ou complexe   | Commits stratégiques ou techniques        |
+| 🔄    | Mise à jour                    | Commit de refacto ou d’update             |
+| 📝    | Journal / historique           | Liste des derniers commits                |
+| 🧬    | Changement dans l’arborescence | Commit impactant la structure du code     |
+| 🗂️   | Fichiers                       | Plusieurs commits sur différents fichiers |
