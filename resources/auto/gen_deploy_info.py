@@ -30,8 +30,10 @@ LAST_COMMIT_MSG = subprocess.check_output(
     ["git", "log", "-1", "--pretty=%B"], text=True
 ).strip()
 
-# Vérifie si le dernier commit est un merge vers github.io
-if LAST_COMMIT_MSG.startswith("Merge") and "github.io" in LAST_COMMIT_MSG:
+# Vérifie si le dernier commit est un merge vers github.io ou un commit semantic-release
+if (
+    LAST_COMMIT_MSG.startswith("Merge") and "github.io" in LAST_COMMIT_MSG
+) or LAST_COMMIT_MSG.startswith("**"):
     PREV_SHA = subprocess.check_output(["git", "rev-parse", "HEAD^"], text=True).strip()
 
     MSG = (
