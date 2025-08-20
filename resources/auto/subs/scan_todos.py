@@ -70,10 +70,6 @@ DEFAULT_EXCLUDES = [
     "docs/outils/logs/todo.md",
 ]
 
-# 2fix 2ar block style as unreleased changelog block
-
-# 2ar Just for trait fixing
-
 # Configuration des tags TODO avec priorité, regex, couleur et description
 TODO_TAGS = [
     # Ordre de priorité (du plus urgent au moins urgent)

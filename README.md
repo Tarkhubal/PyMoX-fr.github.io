@@ -97,19 +97,3 @@ Chaque dépôt est ouvert aux suggestions, améliorations et retours. N’hésit
 ## 📬 Contact
 
 📬 Pour toute question ou discussion, rejoignez-nous sur [Discord – PyMoX](https://discord.com/channels/1395436334507626566/1395436335103213571)
-
-## 2fix just for test
-
-## 2dbug just for test
-
-## 2ar just for test
-
-## * [/] just for test
-
-## * [ ] just for test
-
-## 2do just for test
-
-## 2see just for test
-
-## 2let just for test
