@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.0.5 (2025-08-21)
+
+### Bug Fixes
+
+- Waiting reaction
+  ([`ac4033d`](https://github.com/PyMoX-fr/PyMoX-fr.github.io/commit/ac4033df2ea2c4243778309acc78aca44a279510))
+
+
 ## v1.0.4 (2025-08-20)
 
 ### Ux
