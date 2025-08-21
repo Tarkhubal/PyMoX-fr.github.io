@@ -4,6 +4,7 @@
 
 VIEW_PATH = "docs/outils/essais/essai.md"
 
+# 2fix waiting for any reaction
 
 def retour_link():
     retour = '<a href="../index" style="text-decoration: none; font-weight: bold;">aRetour Sommaire</a>'
