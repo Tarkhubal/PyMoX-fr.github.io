@@ -5,7 +5,7 @@ title:  🪙 Crêpes
 
 [![Dernière version](https://img.shields.io/github/v/tag/PyMoX-fr/PyMoX-fr.github.io?label=Version)](../outils/logs/CHANGELOG.md)
 
-# Reu sept de craies peu 🪙 !
+# Recette de craies peu 🪙 !
 
 ## Ingrédients
 
