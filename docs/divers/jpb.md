@@ -67,6 +67,6 @@ Tu veux qu’on commence à l’ébaucher ?
 
 ---
 
-J'ai pas encore vu la série Real Human, du coup, comme je te l'ai dit sur ta messagerie, mais je pressens que cette fiction est déjà dépassée par notre actuelle réalité !
+J'ai pas encore vu la série Real Human, du coup, comme je te l'ai dit sur ta messagerie, mais je pressens que cette fiction de 2012, cependant sans doute hautement d'actualité, est p't'être bi1 déjà dépassée par notre actuelle réalité !
 
 @++, bisous
