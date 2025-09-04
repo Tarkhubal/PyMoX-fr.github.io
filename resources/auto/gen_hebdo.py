@@ -4,6 +4,8 @@ from importlib.metadata import version, PackageNotFoundError
 import yaml
 from ruamel.yaml import YAML
 
+from resources.tools.string_bools import plur
+
 rapport_lines = []
 SP4 = f"{' ' * 4}"  # 4 espaces pour indentation
 ERR_CNT = 0
@@ -31,7 +33,7 @@ def load_mkdocs_config(opened="+", path="mkdocs.yml"):
             return yaml.load(f)
     except Exception as e:
         log(
-            f"\n{SP4}⚠️ Ceci dit, impossible cependant d'analyser complètement le fichier **{path}**\n",
+            f"\n{SP4}⚠️ Impossible cependant d'analyser complètement le fichier **{path}**\n",
             markdown=True,
         )
         log(
@@ -177,15 +179,12 @@ def check_external_links(opened="+"):
     if broken_links:
         cnt_broken = len(broken_links)
         ERR_CNT += cnt_broken
-        plur_broken = "s" if cnt_broken > 1 else ""
-        cnt_broken
         cnt_good = len(good_links)
-        # plur_good = 's' if cnt_broken > 1 else ''
 
         cnt_total = cnt_broken + cnt_good
 
         log(
-            f"{SP4}❌ {cnt_broken} lien{plur_broken} cassé{plur_broken} ({cnt_broken} / {cnt_total} au total ↔ **{pct(cnt_broken, cnt_total)} %**) :\n\n",
+            f"{SP4}❌ {cnt_broken} lien{plur(cnt_broken)} cassé{plur(cnt_broken)} ({cnt_broken} / {cnt_total} au total ↔ **{pct(cnt_broken, cnt_total)} %**) :\n\n",
             markdown=True,
         )
         for file, link in broken_links:
@@ -203,7 +202,7 @@ def check_external_links(opened="+"):
         log(f"{SP4}\n\n", markdown=True)
 
         log(
-            f'{SP4}??? tip "Voir les {cnt_good}* liens externes valides"\n{SP4*2}*: Sont retirés de cette liste les <b>{cnt_total - cnt_broken - cnt_good} liens</b> issus du <b>[CHANGELOG](CHANGELOG.md)</b>\n\n{SP4*2}---\n',
+            f'{SP4}??? tip "Voir les {cnt_good}* liens externes valides"\n{SP4*2}*: sont retirés de cette liste les <b>{cnt_total - cnt_broken - cnt_good} liens</b> issus du <b>[CHANGELOG](CHANGELOG.md)</b>\n\n{SP4*2}---\n',
             markdown=True,
         )
 

@@ -35,7 +35,7 @@ graph LR
   B------>|Non| E[Succès → Objectif atteint !];
 ```
 
-Donc, ouiais... Selon Gabin (Et pas que), faut sortir de la boucle !
+Donc, ouais... Selon Gabin (Et pas que), faut sortir de la boucle !
 
 ## Pour cela, joues avec les bases du langage Python
 
